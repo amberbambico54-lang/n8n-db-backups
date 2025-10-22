@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict qjte4w8RI9akRBikx1mmqDgYMnYbcMhJZr82nGF53NDHpUhP3qsr5toZf5qKIFn
+-- \restrict EU7AGmrdNsbVamif2Zu5oYXEXVutdehxTzf5V9eEt7EtOtJA8IyJQJzrKb2X6Ln
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -197,7 +197,7 @@ workflow:editor	Workflow Editor	Workflow Editor	workflow	t	2025-10-16 15:46:24.6
 --
 
 COPY "public"."user" ("id", "email", "firstName", "lastName", "password", "personalizationAnswers", "createdAt", "updatedAt", "settings", "disabled", "mfaEnabled", "mfaSecret", "mfaRecoveryCodes", "lastActiveAt", "roleSlug") FROM stdin;
-5a4961b6-3a89-432a-b7c1-90d805069b4f	amberbambico.54@gmail.com	Fernan	Bambico	$2a$10$speYYXYPVYv1eZHzUaKozODBdrev3InCIjJpaBC3pmW/6uqSDpa7q	{"version":"v4","personalization_survey_submitted_at":"2025-10-16T15:50:30.876Z","personalization_survey_n8n_version":"1.115.3","automationGoalDevops":["ci-cd","cloud-infrastructure-orchestration","data-syncing","incident-response","monitoring-alerting","reporting","other","ticketing-systems-integrations"],"automationGoalDevopsOther":"education","companySize":"personalUser","companyType":"education","role":"it","reportedSource":"youtube"}	2025-10-16 15:42:52.513+00	2025-10-21 01:04:03.528+00	{"userActivated": false}	f	f	\N	\N	2025-10-21	global:owner
+5a4961b6-3a89-432a-b7c1-90d805069b4f	amberbambico.54@gmail.com	Fernan	Bambico	$2a$10$speYYXYPVYv1eZHzUaKozODBdrev3InCIjJpaBC3pmW/6uqSDpa7q	{"version":"v4","personalization_survey_submitted_at":"2025-10-16T15:50:30.876Z","personalization_survey_n8n_version":"1.115.3","automationGoalDevops":["ci-cd","cloud-infrastructure-orchestration","data-syncing","incident-response","monitoring-alerting","reporting","other","ticketing-systems-integrations"],"automationGoalDevopsOther":"education","companySize":"personalUser","companyType":"education","role":"it","reportedSource":"youtube"}	2025-10-16 15:42:52.513+00	2025-10-21 04:10:53.841+00	{"userActivated": false}	f	f	\N	\N	2025-10-21	global:owner
 \.
 
 
@@ -274,7 +274,7 @@ COPY "public"."folder" ("id", "name", "parentFolderId", "projectId", "createdAt"
 
 COPY "public"."workflow_entity" ("name", "active", "nodes", "connections", "createdAt", "updatedAt", "settings", "staticData", "pinData", "versionId", "triggerCount", "id", "meta", "parentFolderId", "isArchived") FROM stdin;
 My workflow	f	[{"parameters":{"rule":{"interval":[{}]}},"type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0],"id":"2de74a8d-0902-46e1-9259-058f2175b593","name":"Schedule Trigger"}]	{}	2025-10-16 16:29:34.384+00	2025-10-16 16:29:34.384+00	{"executionOrder":"v1"}	\N	{}	dc3dff43-103d-4a23-aae0-6ff5172f8433	0	rqlUyMiEmIGvzbdF	\N	\N	f
-My workflow	f	[{"parameters":{"rule":{"interval":[{}]}},"type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0],"id":"2de74a8d-0902-46e1-9259-058f2175b593","name":"Schedule Trigger"}]	{}	2025-10-16 16:29:38.221+00	2025-10-16 16:29:38.221+00	{"executionOrder":"v1"}	\N	{}	155a3142-aace-4d7c-85cf-5998aec11270	0	CVzrDFsnctC7SzNS	\N	\N	f
+My workflow	f	[{"parameters":{"rule":{"interval":[{}]}},"type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0],"id":"2de74a8d-0902-46e1-9259-058f2175b593","name":"Schedule Trigger"},{"parameters":{"operation":"create","base":{"__rl":true,"mode":"list","value":""},"table":{"__rl":true,"mode":"list","value":""},"options":{}},"type":"n8n-nodes-base.airtable","typeVersion":2.1,"position":[208,0],"id":"19a7c906-6684-45be-be02-46dbda1c7ac4","name":"Create a record","credentials":{"airtableTokenApi":{"id":"yX9lezaEQv8KPjgH","name":"Airtable Personal Access Token account 2"}}}]	{"Schedule Trigger":{"main":[[{"node":"Create a record","type":"main","index":0}]]}}	2025-10-16 16:29:38.221+00	2025-10-21 03:10:36.671+00	{"executionOrder":"v1"}	{"node:Schedule Trigger":{"recurrenceRules":[]}}	{}	313d0ace-b465-4ec4-ab47-fb44e9b85d43	1	CVzrDFsnctC7SzNS	{"templateCredsSetupCompleted":true}	\N	f
 \.
 
 
@@ -1120,6 +1120,7 @@ COPY "public"."webhook_entity" ("webhookPath", "method", "node", "webhookId", "p
 --
 
 COPY "public"."workflow_history" ("versionId", "workflowId", "authors", "createdAt", "updatedAt", "nodes", "connections") FROM stdin;
+313d0ace-b465-4ec4-ab47-fb44e9b85d43	CVzrDFsnctC7SzNS	Fernan Bambico	2025-10-21 03:10:37.688+00	2025-10-21 03:10:37.688+00	[{"parameters":{"rule":{"interval":[{}]}},"type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0],"id":"2de74a8d-0902-46e1-9259-058f2175b593","name":"Schedule Trigger"},{"parameters":{"operation":"create","base":{"__rl":true,"mode":"list","value":""},"table":{"__rl":true,"mode":"list","value":""},"options":{}},"type":"n8n-nodes-base.airtable","typeVersion":2.1,"position":[208,0],"id":"19a7c906-6684-45be-be02-46dbda1c7ac4","name":"Create a record","credentials":{"airtableTokenApi":{"id":"yX9lezaEQv8KPjgH","name":"Airtable Personal Access Token account 2"}}}]	{"Schedule Trigger":{"main":[[{"node":"Create a record","type":"main","index":0}]]}}
 \.
 
 
@@ -1258,6 +1259,6 @@ SELECT pg_catalog.setval('"public"."migrations_id_seq"', 101, true);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict qjte4w8RI9akRBikx1mmqDgYMnYbcMhJZr82nGF53NDHpUhP3qsr5toZf5qKIFn
+-- \unrestrict EU7AGmrdNsbVamif2Zu5oYXEXVutdehxTzf5V9eEt7EtOtJA8IyJQJzrKb2X6Ln
 
 RESET ALL;
