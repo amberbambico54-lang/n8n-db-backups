@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict BFcmRP52M7TeRx9lLdp3SgEXbtdQUe2H6ZwtnreXTjdlLJtOTU1NxFNOOgYxHIy
+-- \restrict 6hQ4SclcMijXirfN6ezGqxbHhr1cvtUkX5VPI0cCaPgnZ4BH2q8SMMmYoT7ABYA
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -1145,9 +1145,6 @@ COPY "public"."webhook_entity" ("webhookPath", "method", "node", "webhookId", "p
 --
 
 COPY "public"."workflow_history" ("versionId", "workflowId", "authors", "createdAt", "updatedAt", "nodes", "connections") FROM stdin;
-bc4eff75-1cb1-4f26-b1c3-c65ba8db450f	CVzrDFsnctC7SzNS	Fernan Bambico	2025-10-26 13:25:58.18+00	2025-10-26 13:25:58.18+00	[]	{}
-9ad58f03-eee6-4561-9802-d4403b2a3854	CVzrDFsnctC7SzNS	Fernan Bambico	2025-10-26 13:26:06.908+00	2025-10-26 13:26:06.908+00	[]	{}
-1d695e55-679c-442a-8454-1e4e83ac67a1	CVzrDFsnctC7SzNS	Fernan Bambico	2025-10-26 14:16:55.25+00	2025-10-26 14:16:55.25+00	[{"parameters":{},"type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[0,0],"id":"2807691f-9cbc-4ae0-b99f-77abaff9ea3e","name":"When clicking ‘Execute workflow’"},{"parameters":{"options":{}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[208,0],"id":"82b41fe9-0588-4c8c-aa14-a232fd07ec17","name":"Send a message","webhookId":"54d7bf6c-3c19-49a6-abd4-7233cb96feb4","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"content":"## 1.\\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)","width":448},"type":"n8n-nodes-base.stickyNote","position":[-16,-192],"typeVersion":1,"id":"1fa10d5e-c2c2-41b6-b6c5-9b32e7998bbc","name":"Sticky Note"}]	{"When clicking ‘Execute workflow’":{"main":[[{"node":"Send a message","type":"main","index":0}]]}}
 \.
 
 
@@ -1287,6 +1284,6 @@ SELECT pg_catalog.setval('"public"."migrations_id_seq"', 101, true);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict BFcmRP52M7TeRx9lLdp3SgEXbtdQUe2H6ZwtnreXTjdlLJtOTU1NxFNOOgYxHIy
+-- \unrestrict 6hQ4SclcMijXirfN6ezGqxbHhr1cvtUkX5VPI0cCaPgnZ4BH2q8SMMmYoT7ABYA
 
 RESET ALL;
