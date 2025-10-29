@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict 6hQ4SclcMijXirfN6ezGqxbHhr1cvtUkX5VPI0cCaPgnZ4BH2q8SMMmYoT7ABYA
+-- \restrict hv298GaVNJErvyL5eRiymkxPHiw8gmOnb0SUtSHmvvgo8YT2J3m7Aoft04VPV6w
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -197,7 +197,7 @@ workflow:editor	Workflow Editor	Workflow Editor	workflow	t	2025-10-16 15:46:24.6
 --
 
 COPY "public"."user" ("id", "email", "firstName", "lastName", "password", "personalizationAnswers", "createdAt", "updatedAt", "settings", "disabled", "mfaEnabled", "mfaSecret", "mfaRecoveryCodes", "lastActiveAt", "roleSlug") FROM stdin;
-5a4961b6-3a89-432a-b7c1-90d805069b4f	amberbambico.54@gmail.com	Fernan	Bambico	$2a$10$speYYXYPVYv1eZHzUaKozODBdrev3InCIjJpaBC3pmW/6uqSDpa7q	{"version":"v4","personalization_survey_submitted_at":"2025-10-16T15:50:30.876Z","personalization_survey_n8n_version":"1.115.3","automationGoalDevops":["ci-cd","cloud-infrastructure-orchestration","data-syncing","incident-response","monitoring-alerting","reporting","other","ticketing-systems-integrations"],"automationGoalDevopsOther":"education","companySize":"personalUser","companyType":"education","role":"it","reportedSource":"youtube"}	2025-10-16 15:42:52.513+00	2025-10-26 14:37:01.035+00	{"userActivated": false}	f	f	\N	\N	2025-10-26	global:owner
+5a4961b6-3a89-432a-b7c1-90d805069b4f	amberbambico.54@gmail.com	Fernan	Bambico	$2a$10$speYYXYPVYv1eZHzUaKozODBdrev3InCIjJpaBC3pmW/6uqSDpa7q	{"version":"v4","personalization_survey_submitted_at":"2025-10-16T15:50:30.876Z","personalization_survey_n8n_version":"1.115.3","automationGoalDevops":["ci-cd","cloud-infrastructure-orchestration","data-syncing","incident-response","monitoring-alerting","reporting","other","ticketing-systems-integrations"],"automationGoalDevopsOther":"education","companySize":"personalUser","companyType":"education","role":"it","reportedSource":"youtube"}	2025-10-16 15:42:52.513+00	2025-10-28 12:30:41.692+00	{"userActivated": false}	f	f	\N	\N	2025-10-28	global:owner
 \.
 
 
@@ -1284,6 +1284,6 @@ SELECT pg_catalog.setval('"public"."migrations_id_seq"', 101, true);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict 6hQ4SclcMijXirfN6ezGqxbHhr1cvtUkX5VPI0cCaPgnZ4BH2q8SMMmYoT7ABYA
+-- \unrestrict hv298GaVNJErvyL5eRiymkxPHiw8gmOnb0SUtSHmvvgo8YT2J3m7Aoft04VPV6w
 
 RESET ALL;
