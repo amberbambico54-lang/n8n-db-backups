@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict DCrlcGiTBPrVYZUjv4z3ZG0QZmflbWdX2o6dZQnrtFppapOTBkSPRgGok60KMPM
+-- \restrict O6LigPRZ4v4AYyqCoNp21MRqZahf6cvzevQ6tRzBngAR9j06tdU8sE5VE1Dqvzb
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -181,14 +181,14 @@ COPY "public"."role" ("slug", "displayName", "description", "roleType", "systemR
 global:owner	Owner	Owner	global	t	2025-10-16 15:46:08.356+00	2025-10-16 15:46:20.789+00
 global:admin	Admin	Admin	global	t	2025-10-16 15:46:08.356+00	2025-10-16 15:46:20.789+00
 global:member	Member	Member	global	t	2025-10-16 15:46:08.356+00	2025-10-16 15:46:20.789+00
-project:admin	Project Admin	Project Admin	project	t	2025-10-16 15:46:08.356+00	2025-10-16 15:46:22.288+00
 project:personalOwner	Project Owner	Project Owner	project	t	2025-10-16 15:46:08.356+00	2025-10-16 15:46:22.288+00
-project:editor	Project Editor	Project Editor	project	t	2025-10-16 15:46:08.356+00	2025-10-16 15:46:22.288+00
-project:viewer	Project Viewer	Project Viewer	project	t	2025-10-16 15:46:08.356+00	2025-10-16 15:46:22.288+00
 credential:owner	Credential Owner	Credential Owner	credential	t	2025-10-16 15:46:23.646+00	2025-10-16 15:46:23.646+00
 credential:user	Credential User	Credential User	credential	t	2025-10-16 15:46:23.646+00	2025-10-16 15:46:23.646+00
 workflow:owner	Workflow Owner	Workflow Owner	workflow	t	2025-10-16 15:46:24.629+00	2025-10-16 15:46:24.629+00
 workflow:editor	Workflow Editor	Workflow Editor	workflow	t	2025-10-16 15:46:24.629+00	2025-10-16 15:46:24.629+00
+project:admin	Project Admin	Full control of settings, members, workflows, credentials and executions	project	t	2025-10-16 15:46:08.356+00	2025-11-25 15:24:45.413+00
+project:editor	Project Editor	Create, edit, and delete workflows, credentials, and executions	project	t	2025-10-16 15:46:08.356+00	2025-11-25 15:24:45.413+00
+project:viewer	Project Viewer	Read-only access to workflows, credentials, and executions	project	t	2025-10-16 15:46:08.356+00	2025-11-25 15:24:45.413+00
 \.
 
 
@@ -197,7 +197,7 @@ workflow:editor	Workflow Editor	Workflow Editor	workflow	t	2025-10-16 15:46:24.6
 --
 
 COPY "public"."user" ("id", "email", "firstName", "lastName", "password", "personalizationAnswers", "createdAt", "updatedAt", "settings", "disabled", "mfaEnabled", "mfaSecret", "mfaRecoveryCodes", "lastActiveAt", "roleSlug") FROM stdin;
-5a4961b6-3a89-432a-b7c1-90d805069b4f	amberbambico.54@gmail.com	Fernan	Bambico	$2a$10$speYYXYPVYv1eZHzUaKozODBdrev3InCIjJpaBC3pmW/6uqSDpa7q	{"version":"v4","personalization_survey_submitted_at":"2025-10-16T15:50:30.876Z","personalization_survey_n8n_version":"1.115.3","automationGoalDevops":["ci-cd","cloud-infrastructure-orchestration","data-syncing","incident-response","monitoring-alerting","reporting","other","ticketing-systems-integrations"],"automationGoalDevopsOther":"education","companySize":"personalUser","companyType":"education","role":"it","reportedSource":"youtube"}	2025-10-16 15:42:52.513+00	2025-11-24 14:26:50.52+00	{"userActivated": false}	f	f	\N	\N	2025-11-24	global:owner
+5a4961b6-3a89-432a-b7c1-90d805069b4f	amberbambico.54@gmail.com	Fernan	Bambico	$2a$10$speYYXYPVYv1eZHzUaKozODBdrev3InCIjJpaBC3pmW/6uqSDpa7q	{"version":"v4","personalization_survey_submitted_at":"2025-10-16T15:50:30.876Z","personalization_survey_n8n_version":"1.115.3","automationGoalDevops":["ci-cd","cloud-infrastructure-orchestration","data-syncing","incident-response","monitoring-alerting","reporting","other","ticketing-systems-integrations"],"automationGoalDevopsOther":"education","companySize":"personalUser","companyType":"education","role":"it","reportedSource":"youtube"}	2025-10-16 15:42:52.513+00	2025-11-25 15:26:32.158+00	{"userActivated": false}	f	f	\N	\N	2025-11-25	global:owner
 \.
 
 
@@ -234,11 +234,64 @@ Gmail account	U2FsdGVkX19qElueecI2ColgcPeWP55Svbv/qbk9vNq8B/RkG8ElNwCK4gR0TERaR9
 
 
 --
+-- Data for Name: chat_hub_agents; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."chat_hub_agents" ("id", "name", "description", "systemPrompt", "ownerId", "credentialId", "provider", "model", "createdAt", "updatedAt", "tools") FROM stdin;
+\.
+
+
+--
 -- Data for Name: project; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY "public"."project" ("id", "name", "type", "createdAt", "updatedAt", "icon", "description") FROM stdin;
 e8RpyUBIAxTYUpu5	Fernan Bambico <amberbambico.54@gmail.com>	personal	2025-10-16 15:44:23.022+00	2025-10-16 15:47:54.322+00	\N	\N
+\.
+
+
+--
+-- Data for Name: folder; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."folder" ("id", "name", "parentFolderId", "projectId", "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: workflow_entity; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."workflow_entity" ("name", "active", "nodes", "connections", "createdAt", "updatedAt", "settings", "staticData", "pinData", "versionId", "triggerCount", "id", "meta", "parentFolderId", "isArchived", "versionCounter", "description") FROM stdin;
+1.N8n Course	f	[{"parameters":{},"type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[0,0],"id":"2807691f-9cbc-4ae0-b99f-77abaff9ea3e","name":"When clicking ‘Execute workflow’"},{"parameters":{"sendTo":"amberbambico.54@gmail.com","subject":"hello","message":"hello","options":{}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[560,0],"id":"82b41fe9-0588-4c8c-aa14-a232fd07ec17","name":"Send a message","webhookId":"54d7bf6c-3c19-49a6-abd4-7233cb96feb4","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"content":"## 1.\\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)","width":448},"type":"n8n-nodes-base.stickyNote","position":[-16,-192],"typeVersion":1,"id":"1fa10d5e-c2c2-41b6-b6c5-9b32e7998bbc","name":"Sticky Note"},{"parameters":{"operation":"appendOrUpdate","documentId":{"__rl":true,"mode":"list","value":""},"sheetName":{"__rl":true,"mode":"list","value":""}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"72f88487-827c-409c-a9db-6d0b93b75055","name":"Append or update row in sheet"}]	{"When clicking ‘Execute workflow’":{"main":[[{"node":"Append or update row in sheet","type":"main","index":0}]]},"Append or update row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]}}	2025-10-16 16:29:38.221+00	2025-10-31 13:29:29.787+00	{"executionOrder":"v1"}	{"node:Schedule Trigger":{"recurrenceRules":[]}}	{}	46327ea6-6714-42a4-97d0-0ac05253e45f	1	CVzrDFsnctC7SzNS	{"templateCredsSetupCompleted":true}	\N	f	1	\N
+My workflow 2	f	[{"parameters":{"formTitle":"Contact Form","formDescription":"Contact us when you have any problem to solve","formFields":{"values":[{"fieldLabel":"First Name","placeholder":"Enter you name","requiredField":true},{"fieldLabel":"Last Name","placeholder":"Enter your last name","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Enter Your Email","requiredField":true},{"fieldLabel":"Description","placeholder":"Elaborate the problem"},{"fieldLabel":"Course Type","fieldType":"dropdown","fieldOptions":{"values":[{"option":"n8n course"},{"option":"Zapier couse"},{"option":"Midjourney course"}]}}]},"options":{}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"cd57f4ca-774e-469e-95bf-b95c08107ccd","name":"On form submission","webhookId":"151d9ef3-a068-46f0-9527-4f50d54e0d0e"}]	{}	2025-11-06 15:24:22.717+00	2025-11-06 15:24:22.717+00	{"executionOrder":"v1"}	\N	{}	4648e10f-14da-4e1c-9c48-a7a4028d21a3	0	voZ63FWwaK7OZ3qy	\N	\N	f	1	\N
+My workflow	f	[{"parameters":{"rule":{"interval":[{}]}},"type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0],"id":"2de74a8d-0902-46e1-9259-058f2175b593","name":"Schedule Trigger"}]	{}	2025-10-16 16:29:34.384+00	2025-10-26 12:12:30.517+00	{"executionOrder":"v1"}	{"node:Schedule Trigger":{"recurrenceRules":[]}}	{}	dc3dff43-103d-4a23-aae0-6ff5172f8433	1	rqlUyMiEmIGvzbdF	\N	\N	f	1	\N
+1st Activity Workflow	f	[{"parameters":{"formTitle":"Test Info","formDescription":"Please Fill out the Form Below","formFields":{"values":[{"fieldLabel":"Full Name","placeholder":"Juan Tamad","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Hello@gmail.com","requiredField":true},{"fieldLabel":"Phone Number","placeholder":"+63 912 345 6789","requiredField":true},{"fieldLabel":"Description","placeholder":"Please Provide a description below","requiredField":true}]},"options":{"appendAttribution":false}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"7676b103-5de1-4298-83b4-8b09edc67ce8","name":"On form submission","webhookId":"b2482471-8fb8-4960-a39e-9464d2167715"},{"parameters":{"operation":"append","documentId":{"__rl":true,"value":"1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI","mode":"list","cachedResultName":"Activity n8n","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI/edit?usp=drivesdk"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI/edit#gid=0"},"columns":{"mappingMode":"defineBelow","value":{"Full Name":"={{ $json['Full Name'] }}","Email":"={{ $json.Email }}","Phone Number":"={{ $json['Phone Number'] }}","Description":"={{ $json.Description }}"},"matchingColumns":[],"schema":[{"id":"Full Name","displayName":"Full Name","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Email","displayName":"Email","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Phone Number","displayName":"Phone Number","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Description","displayName":"Description","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true}],"attemptToConvertTypes":false,"convertFieldsToString":false},"options":{}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"dd6fe731-13c7-47e2-b72c-bf6b18e4dd28","name":"Append row in sheet","credentials":{"googleSheetsOAuth2Api":{"id":"YiO5g4n9aj4N6K5r","name":"Google Sheets account"}}},{"parameters":{"authentication":"oAuth2","select":"channel","channelId":{"__rl":true,"value":"C09REAYK8FP","mode":"list","cachedResultName":"ai"},"text":"=A New Client has been Added to the Data\\nFulle Name:{{ $json['Full Name'] }}\\nEmail:{{ $json.Email }}\\nPhone Number:{{ $json['Phone Number'] }}\\nDescription:{{ $json.Description }}","otherOptions":{}},"type":"n8n-nodes-base.slack","typeVersion":2.3,"position":[416,0],"id":"d82a7d3f-89b6-4147-bc45-9c3cfc3943d8","name":"Send a message","webhookId":"444f31bf-afcc-40bb-acc5-8aa50db553ab","credentials":{"slackOAuth2Api":{"id":"kPI2sESxpdDipRRh","name":"Slack account"}}},{"parameters":{"sendTo":"={{ $('Append row in sheet').item.json.Email }}","subject":"Thank you for submitting the form","emailType":"text","message":"=Hi {{ $('Append row in sheet').item.json['Full Name'] }},\\n\\nThank you for taking the time to fill out our form.\\nWe’ve received your information successfully and will review it shortly.\\n\\nIf you have any questions, feel free to reply to this message.\\nWe appreciate your time and interest!\\n\\nBest regards,\\nThe Team","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[624,0],"id":"9b321c83-b0de-4a20-94b3-8a8ab71f3019","name":"Send a message1","webhookId":"c5080767-d0f8-40d6-a8d9-b66396e79c3f","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"familyName":"={{ $('Append row in sheet').item.json['Full Name'] }}","additionalFields":{"emailsUi":{"emailsValues":[{"type":"work","value":"={{ $('Append row in sheet').item.json.Email }}"}]},"phoneUi":{"phoneValues":[{"type":"work","value":"={{ $('Append row in sheet').item.json['Phone Number'] }}"}]}}},"type":"n8n-nodes-base.googleContacts","typeVersion":1,"position":[832,0],"id":"2ccae68f-4f7e-4f99-8baf-c9ee7948544a","name":"Create a contact","credentials":{"googleContactsOAuth2Api":{"id":"LOg9qvC6ODDyOno0","name":"Google Contacts account"}}},{"parameters":{"content":"## Trigger: Google Sheets\\n\\nName, email, phone number, description\\n"},"type":"n8n-nodes-base.stickyNote","position":[128,-208],"typeVersion":1,"id":"ebd56b3d-093b-45df-85de-d5649e3a620c","name":"Sticky Note"},{"parameters":{"content":"## Slack: Notify Your Team\\n\\nAdd a Slack node to send a message to your team's Channel asking to handle the client's Request\\n\\nthe message should show\\nName, email, phone number, description\\n\\n\\n","height":208,"width":304},"type":"n8n-nodes-base.stickyNote","position":[320,176],"typeVersion":1,"id":"5b68b80b-420a-492e-9228-9f5f33a57492","name":"Sticky Note1"},{"parameters":{"content":"## Gmail: Thank you Email to Client\\n\\nAdd a Gmail node to send a thank you email to the client's email address from the sheet.\\n","height":208},"type":"n8n-nodes-base.stickyNote","position":[544,-240],"typeVersion":1,"id":"ec0aedd1-bfd4-42b5-87a0-6fcac780de03","name":"Sticky Note2"},{"parameters":{"content":"## Google Contacts: Add Client\\n\\nAdd a Google Contacts node to create a new contact using the name, email, and phone number from your google sheet.\\n","height":208},"type":"n8n-nodes-base.stickyNote","position":[800,176],"typeVersion":1,"id":"74935353-81ef-4aef-b6bc-543b2f827367","name":"Sticky Note3"}]	{"On form submission":{"main":[[{"node":"Append row in sheet","type":"main","index":0}]]},"Append row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]},"Send a message":{"main":[[{"node":"Send a message1","type":"main","index":0}]]},"Send a message1":{"main":[[{"node":"Create a contact","type":"main","index":0}]]}}	2025-11-07 16:46:55.045+00	2025-11-07 17:50:23.919+00	{"executionOrder":"v1"}	\N	{}	1df38851-8863-4a61-9f11-86b9292e0641	0	1hiCHSIWj6hNUOQB	{"templateCredsSetupCompleted":true}	\N	f	1	\N
+First Workflow	f	[{"parameters":{"formTitle":"Contact Form","formDescription":"Contact us when you have any problem to solve","formFields":{"values":[{"fieldLabel":"First Name","placeholder":"Enter you name","requiredField":true},{"fieldLabel":"Last Name","placeholder":"Enter your last name","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Enter Your Email","requiredField":true},{"fieldLabel":"Description","placeholder":"Elaborate the problem"},{"fieldLabel":"Course Type","fieldType":"dropdown","fieldOptions":{"values":[{"option":"n8n course"},{"option":"Zapier couse"},{"option":"Midjourney course"}]}}]},"options":{}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"cd57f4ca-774e-469e-95bf-b95c08107ccd","name":"On form submission","webhookId":"151d9ef3-a068-46f0-9527-4f50d54e0d0e"},{"parameters":{"operation":"append","documentId":{"__rl":true,"value":"19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU","mode":"list","cachedResultName":"Customer Data","cachedResultUrl":"https://docs.google.com/spreadsheets/d/19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU/edit?usp=drivesdk"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU/edit#gid=0"},"columns":{"mappingMode":"defineBelow","value":{"First Name ":"={{ $json['First Name'] }}","Last Name":"={{ $json['Last Name'] }}","Email":"={{ $json.Email }}","Description":"={{ $json.Description }}","Course Type":"={{ $json['Course Type'] }}"},"matchingColumns":[],"schema":[{"id":"First Name ","displayName":"First Name ","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Last Name","displayName":"Last Name","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Email","displayName":"Email","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Description","displayName":"Description","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Course Type","displayName":"Course Type","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true,"removed":false}],"attemptToConvertTypes":false,"convertFieldsToString":false},"options":{}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"32e7a53c-aa23-4f88-a7b4-deffa7a668de","name":"Append row in sheet","credentials":{"googleSheetsOAuth2Api":{"id":"YiO5g4n9aj4N6K5r","name":"Google Sheets account"}}},{"parameters":{"sendTo":"=amberbambico.54@gmail.com","subject":"Thank you for your submission","emailType":"text","message":"=Hey {{ $json['First Name '] }}\\n\\nThank you for your submission, we want to confimr that we recieve a message and we will be contacting you soon.\\n\\nBest regards,\\nSupport Team","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[416,0],"id":"9dd9f512-5321-4deb-8846-764feee5e27e","name":"Send a message","webhookId":"5e3777a4-f485-4117-a7a5-c3d89fd13dba","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"authentication":"oAuth2","select":"channel","channelId":{"__rl":true,"value":"C09REAYK8FP","mode":"list","cachedResultName":"ai"},"text":"=The new Client Submitted the form\\nFirst Name:{{ $('On form submission').item.json['First Name'] }}\\nEmail:{{ $('On form submission').item.json.Email }}\\nDescription:{{ $('On form submission').item.json.Description }}","otherOptions":{}},"type":"n8n-nodes-base.slack","typeVersion":2.3,"position":[624,0],"id":"2cc6c84e-be2a-4d23-aab3-d4e682b2ba23","name":"Send a message1","webhookId":"52d9201a-d517-4886-bf5e-af2bcdfdc1c3","credentials":{"slackOAuth2Api":{"id":"kPI2sESxpdDipRRh","name":"Slack account"}}}]	{"On form submission":{"main":[[{"node":"Append row in sheet","type":"main","index":0}]]},"Append row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]},"Send a message":{"main":[[{"node":"Send a message1","type":"main","index":0}]]}}	2025-11-06 15:24:29.028+00	2025-11-07 16:45:38.442+00	{"executionOrder":"v1"}	\N	{"Append row in sheet":[{"json":{"First Name ":"Fernan","Last Name":"Bambico","Email":"amberbambico.54@gmail.com","Description":"test","Course Type":"n8n Masterclass"}}]}	98f1a092-d1bc-4097-9e0f-24c05477cc83	0	ucN5q0JcZhOAY6id	{"templateCredsSetupCompleted":true}	\N	f	1	\N
+\.
+
+
+--
+-- Data for Name: chat_hub_sessions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."chat_hub_sessions" ("id", "title", "ownerId", "lastMessageAt", "credentialId", "provider", "model", "workflowId", "createdAt", "updatedAt", "agentId", "agentName", "tools") FROM stdin;
+\.
+
+
+--
+-- Data for Name: execution_entity; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."execution_entity" ("id", "finished", "mode", "retryOf", "retrySuccessId", "startedAt", "stoppedAt", "waitTill", "status", "workflowId", "deletedAt", "createdAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: chat_hub_messages; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."chat_hub_messages" ("id", "sessionId", "previousMessageId", "revisionOfMessageId", "retryOfMessageId", "type", "name", "content", "provider", "model", "workflowId", "executionId", "createdAt", "updatedAt", "agentId", "status") FROM stdin;
 \.
 
 
@@ -263,35 +316,6 @@ COPY "public"."data_table_column" ("id", "name", "type", "index", "dataTableId",
 --
 
 COPY "public"."event_destinations" ("id", "destination", "createdAt", "updatedAt") FROM stdin;
-\.
-
-
---
--- Data for Name: folder; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "public"."folder" ("id", "name", "parentFolderId", "projectId", "createdAt", "updatedAt") FROM stdin;
-\.
-
-
---
--- Data for Name: workflow_entity; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "public"."workflow_entity" ("name", "active", "nodes", "connections", "createdAt", "updatedAt", "settings", "staticData", "pinData", "versionId", "triggerCount", "id", "meta", "parentFolderId", "isArchived") FROM stdin;
-1.N8n Course	f	[{"parameters":{},"type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[0,0],"id":"2807691f-9cbc-4ae0-b99f-77abaff9ea3e","name":"When clicking ‘Execute workflow’"},{"parameters":{"sendTo":"amberbambico.54@gmail.com","subject":"hello","message":"hello","options":{}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[560,0],"id":"82b41fe9-0588-4c8c-aa14-a232fd07ec17","name":"Send a message","webhookId":"54d7bf6c-3c19-49a6-abd4-7233cb96feb4","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"content":"## 1.\\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)","width":448},"type":"n8n-nodes-base.stickyNote","position":[-16,-192],"typeVersion":1,"id":"1fa10d5e-c2c2-41b6-b6c5-9b32e7998bbc","name":"Sticky Note"},{"parameters":{"operation":"appendOrUpdate","documentId":{"__rl":true,"mode":"list","value":""},"sheetName":{"__rl":true,"mode":"list","value":""}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"72f88487-827c-409c-a9db-6d0b93b75055","name":"Append or update row in sheet"}]	{"When clicking ‘Execute workflow’":{"main":[[{"node":"Append or update row in sheet","type":"main","index":0}]]},"Append or update row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]}}	2025-10-16 16:29:38.221+00	2025-10-31 13:29:29.787+00	{"executionOrder":"v1"}	{"node:Schedule Trigger":{"recurrenceRules":[]}}	{}	46327ea6-6714-42a4-97d0-0ac05253e45f	1	CVzrDFsnctC7SzNS	{"templateCredsSetupCompleted":true}	\N	f
-My workflow 2	f	[{"parameters":{"formTitle":"Contact Form","formDescription":"Contact us when you have any problem to solve","formFields":{"values":[{"fieldLabel":"First Name","placeholder":"Enter you name","requiredField":true},{"fieldLabel":"Last Name","placeholder":"Enter your last name","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Enter Your Email","requiredField":true},{"fieldLabel":"Description","placeholder":"Elaborate the problem"},{"fieldLabel":"Course Type","fieldType":"dropdown","fieldOptions":{"values":[{"option":"n8n course"},{"option":"Zapier couse"},{"option":"Midjourney course"}]}}]},"options":{}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"cd57f4ca-774e-469e-95bf-b95c08107ccd","name":"On form submission","webhookId":"151d9ef3-a068-46f0-9527-4f50d54e0d0e"}]	{}	2025-11-06 15:24:22.717+00	2025-11-06 15:24:22.717+00	{"executionOrder":"v1"}	\N	{}	4648e10f-14da-4e1c-9c48-a7a4028d21a3	0	voZ63FWwaK7OZ3qy	\N	\N	f
-My workflow	f	[{"parameters":{"rule":{"interval":[{}]}},"type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0],"id":"2de74a8d-0902-46e1-9259-058f2175b593","name":"Schedule Trigger"}]	{}	2025-10-16 16:29:34.384+00	2025-10-26 12:12:30.517+00	{"executionOrder":"v1"}	{"node:Schedule Trigger":{"recurrenceRules":[]}}	{}	dc3dff43-103d-4a23-aae0-6ff5172f8433	1	rqlUyMiEmIGvzbdF	\N	\N	f
-1st Activity Workflow	f	[{"parameters":{"formTitle":"Test Info","formDescription":"Please Fill out the Form Below","formFields":{"values":[{"fieldLabel":"Full Name","placeholder":"Juan Tamad","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Hello@gmail.com","requiredField":true},{"fieldLabel":"Phone Number","placeholder":"+63 912 345 6789","requiredField":true},{"fieldLabel":"Description","placeholder":"Please Provide a description below","requiredField":true}]},"options":{"appendAttribution":false}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"7676b103-5de1-4298-83b4-8b09edc67ce8","name":"On form submission","webhookId":"b2482471-8fb8-4960-a39e-9464d2167715"},{"parameters":{"operation":"append","documentId":{"__rl":true,"value":"1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI","mode":"list","cachedResultName":"Activity n8n","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI/edit?usp=drivesdk"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI/edit#gid=0"},"columns":{"mappingMode":"defineBelow","value":{"Full Name":"={{ $json['Full Name'] }}","Email":"={{ $json.Email }}","Phone Number":"={{ $json['Phone Number'] }}","Description":"={{ $json.Description }}"},"matchingColumns":[],"schema":[{"id":"Full Name","displayName":"Full Name","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Email","displayName":"Email","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Phone Number","displayName":"Phone Number","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Description","displayName":"Description","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true}],"attemptToConvertTypes":false,"convertFieldsToString":false},"options":{}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"dd6fe731-13c7-47e2-b72c-bf6b18e4dd28","name":"Append row in sheet","credentials":{"googleSheetsOAuth2Api":{"id":"YiO5g4n9aj4N6K5r","name":"Google Sheets account"}}},{"parameters":{"authentication":"oAuth2","select":"channel","channelId":{"__rl":true,"value":"C09REAYK8FP","mode":"list","cachedResultName":"ai"},"text":"=A New Client has been Added to the Data\\nFulle Name:{{ $json['Full Name'] }}\\nEmail:{{ $json.Email }}\\nPhone Number:{{ $json['Phone Number'] }}\\nDescription:{{ $json.Description }}","otherOptions":{}},"type":"n8n-nodes-base.slack","typeVersion":2.3,"position":[416,0],"id":"d82a7d3f-89b6-4147-bc45-9c3cfc3943d8","name":"Send a message","webhookId":"444f31bf-afcc-40bb-acc5-8aa50db553ab","credentials":{"slackOAuth2Api":{"id":"kPI2sESxpdDipRRh","name":"Slack account"}}},{"parameters":{"sendTo":"={{ $('Append row in sheet').item.json.Email }}","subject":"Thank you for submitting the form","emailType":"text","message":"=Hi {{ $('Append row in sheet').item.json['Full Name'] }},\\n\\nThank you for taking the time to fill out our form.\\nWe’ve received your information successfully and will review it shortly.\\n\\nIf you have any questions, feel free to reply to this message.\\nWe appreciate your time and interest!\\n\\nBest regards,\\nThe Team","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[624,0],"id":"9b321c83-b0de-4a20-94b3-8a8ab71f3019","name":"Send a message1","webhookId":"c5080767-d0f8-40d6-a8d9-b66396e79c3f","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"familyName":"={{ $('Append row in sheet').item.json['Full Name'] }}","additionalFields":{"emailsUi":{"emailsValues":[{"type":"work","value":"={{ $('Append row in sheet').item.json.Email }}"}]},"phoneUi":{"phoneValues":[{"type":"work","value":"={{ $('Append row in sheet').item.json['Phone Number'] }}"}]}}},"type":"n8n-nodes-base.googleContacts","typeVersion":1,"position":[832,0],"id":"2ccae68f-4f7e-4f99-8baf-c9ee7948544a","name":"Create a contact","credentials":{"googleContactsOAuth2Api":{"id":"LOg9qvC6ODDyOno0","name":"Google Contacts account"}}},{"parameters":{"content":"## Trigger: Google Sheets\\n\\nName, email, phone number, description\\n"},"type":"n8n-nodes-base.stickyNote","position":[128,-208],"typeVersion":1,"id":"ebd56b3d-093b-45df-85de-d5649e3a620c","name":"Sticky Note"},{"parameters":{"content":"## Slack: Notify Your Team\\n\\nAdd a Slack node to send a message to your team's Channel asking to handle the client's Request\\n\\nthe message should show\\nName, email, phone number, description\\n\\n\\n","height":208,"width":304},"type":"n8n-nodes-base.stickyNote","position":[320,176],"typeVersion":1,"id":"5b68b80b-420a-492e-9228-9f5f33a57492","name":"Sticky Note1"},{"parameters":{"content":"## Gmail: Thank you Email to Client\\n\\nAdd a Gmail node to send a thank you email to the client's email address from the sheet.\\n","height":208},"type":"n8n-nodes-base.stickyNote","position":[544,-240],"typeVersion":1,"id":"ec0aedd1-bfd4-42b5-87a0-6fcac780de03","name":"Sticky Note2"},{"parameters":{"content":"## Google Contacts: Add Client\\n\\nAdd a Google Contacts node to create a new contact using the name, email, and phone number from your google sheet.\\n","height":208},"type":"n8n-nodes-base.stickyNote","position":[800,176],"typeVersion":1,"id":"74935353-81ef-4aef-b6bc-543b2f827367","name":"Sticky Note3"}]	{"On form submission":{"main":[[{"node":"Append row in sheet","type":"main","index":0}]]},"Append row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]},"Send a message":{"main":[[{"node":"Send a message1","type":"main","index":0}]]},"Send a message1":{"main":[[{"node":"Create a contact","type":"main","index":0}]]}}	2025-11-07 16:46:55.045+00	2025-11-07 17:50:23.919+00	{"executionOrder":"v1"}	\N	{}	1df38851-8863-4a61-9f11-86b9292e0641	0	1hiCHSIWj6hNUOQB	{"templateCredsSetupCompleted":true}	\N	f
-First Workflow	f	[{"parameters":{"formTitle":"Contact Form","formDescription":"Contact us when you have any problem to solve","formFields":{"values":[{"fieldLabel":"First Name","placeholder":"Enter you name","requiredField":true},{"fieldLabel":"Last Name","placeholder":"Enter your last name","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Enter Your Email","requiredField":true},{"fieldLabel":"Description","placeholder":"Elaborate the problem"},{"fieldLabel":"Course Type","fieldType":"dropdown","fieldOptions":{"values":[{"option":"n8n course"},{"option":"Zapier couse"},{"option":"Midjourney course"}]}}]},"options":{}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"cd57f4ca-774e-469e-95bf-b95c08107ccd","name":"On form submission","webhookId":"151d9ef3-a068-46f0-9527-4f50d54e0d0e"},{"parameters":{"operation":"append","documentId":{"__rl":true,"value":"19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU","mode":"list","cachedResultName":"Customer Data","cachedResultUrl":"https://docs.google.com/spreadsheets/d/19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU/edit?usp=drivesdk"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU/edit#gid=0"},"columns":{"mappingMode":"defineBelow","value":{"First Name ":"={{ $json['First Name'] }}","Last Name":"={{ $json['Last Name'] }}","Email":"={{ $json.Email }}","Description":"={{ $json.Description }}","Course Type":"={{ $json['Course Type'] }}"},"matchingColumns":[],"schema":[{"id":"First Name ","displayName":"First Name ","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Last Name","displayName":"Last Name","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Email","displayName":"Email","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Description","displayName":"Description","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Course Type","displayName":"Course Type","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true,"removed":false}],"attemptToConvertTypes":false,"convertFieldsToString":false},"options":{}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"32e7a53c-aa23-4f88-a7b4-deffa7a668de","name":"Append row in sheet","credentials":{"googleSheetsOAuth2Api":{"id":"YiO5g4n9aj4N6K5r","name":"Google Sheets account"}}},{"parameters":{"sendTo":"=amberbambico.54@gmail.com","subject":"Thank you for your submission","emailType":"text","message":"=Hey {{ $json['First Name '] }}\\n\\nThank you for your submission, we want to confimr that we recieve a message and we will be contacting you soon.\\n\\nBest regards,\\nSupport Team","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[416,0],"id":"9dd9f512-5321-4deb-8846-764feee5e27e","name":"Send a message","webhookId":"5e3777a4-f485-4117-a7a5-c3d89fd13dba","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"authentication":"oAuth2","select":"channel","channelId":{"__rl":true,"value":"C09REAYK8FP","mode":"list","cachedResultName":"ai"},"text":"=The new Client Submitted the form\\nFirst Name:{{ $('On form submission').item.json['First Name'] }}\\nEmail:{{ $('On form submission').item.json.Email }}\\nDescription:{{ $('On form submission').item.json.Description }}","otherOptions":{}},"type":"n8n-nodes-base.slack","typeVersion":2.3,"position":[624,0],"id":"2cc6c84e-be2a-4d23-aab3-d4e682b2ba23","name":"Send a message1","webhookId":"52d9201a-d517-4886-bf5e-af2bcdfdc1c3","credentials":{"slackOAuth2Api":{"id":"kPI2sESxpdDipRRh","name":"Slack account"}}}]	{"On form submission":{"main":[[{"node":"Append row in sheet","type":"main","index":0}]]},"Append row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]},"Send a message":{"main":[[{"node":"Send a message1","type":"main","index":0}]]}}	2025-11-06 15:24:29.028+00	2025-11-07 16:45:38.442+00	{"executionOrder":"v1"}	\N	{"Append row in sheet":[{"json":{"First Name ":"Fernan","Last Name":"Bambico","Email":"amberbambico.54@gmail.com","Description":"test","Course Type":"n8n Masterclass"}}]}	98f1a092-d1bc-4097-9e0f-24c05477cc83	0	ucN5q0JcZhOAY6id	{"templateCredsSetupCompleted":true}	\N	f
-\.
-
-
---
--- Data for Name: execution_entity; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "public"."execution_entity" ("id", "finished", "mode", "retryOf", "retrySuccessId", "startedAt", "stoppedAt", "waitTill", "status", "workflowId", "deletedAt", "createdAt") FROM stdin;
 \.
 
 
@@ -498,6 +522,61 @@ COPY "public"."migrations" ("id", "timestamp", "name") FROM stdin;
 99	1756906557570	AddTimestampsToRoleAndRoleIndexes1756906557570
 100	1758731786132	AddAudienceColumnToApiKeys1758731786132
 101	1758794506893	AddProjectIdToVariableTable1758794506893
+102	1759399811000	ChangeValueTypesForInsights1759399811000
+103	1760019379982	CreateChatHubTables1760019379982
+104	1760020000000	CreateChatHubAgentTable1760020000000
+105	1760020838000	UniqueRoleNames1760020838000
+106	1760116750277	CreateOAuthEntities1760116750277
+107	1760314000000	CreateWorkflowDependencyTable1760314000000
+108	1760965142113	DropUnusedChatHubColumns1760965142113
+109	1761047826451	AddWorkflowVersionColumn1761047826451
+110	1761655473000	ChangeDependencyInfoToJson1761655473000
+111	1761830340990	AddToolsColumnToChatHubTables1761830340990
+112	1762177736257	AddWorkflowDescriptionColumn1762177736257
+113	1762763704614	BackfillMissingWorkflowHistoryRecords1762763704614
+114	1762771264000	ChangeDefaultForIdInUserTable1762771264000
+115	1762847206508	AddWorkflowHistoryAutoSaveFields1762847206508
+116	1763572724000	ChangeOAuthStateColumnToUnboundedVarchar1763572724000
+\.
+
+
+--
+-- Data for Name: oauth_clients; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."oauth_clients" ("id", "name", "redirectUris", "grantTypes", "clientSecret", "clientSecretExpiresAt", "tokenEndpointAuthMethod", "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_access_tokens; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."oauth_access_tokens" ("token", "clientId", "userId") FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_authorization_codes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."oauth_authorization_codes" ("code", "clientId", "userId", "redirectUri", "codeChallenge", "codeChallengeMethod", "expiresAt", "state", "used", "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_refresh_tokens; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."oauth_refresh_tokens" ("token", "clientId", "userId", "expiresAt", "createdAt", "updatedAt") FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_user_consents; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."oauth_user_consents" ("id", "userId", "clientId", "grantedAt") FROM stdin;
 \.
 
 
@@ -641,15 +720,6 @@ insights:list	insights:list	\N
 insights:*	insights:*	\N
 oidc:manage	oidc:manage	\N
 oidc:*	oidc:*	\N
-dataStore:create	dataStore:create	\N
-dataStore:read	dataStore:read	\N
-dataStore:update	dataStore:update	\N
-dataStore:delete	dataStore:delete	\N
-dataStore:list	dataStore:list	\N
-dataStore:readRow	dataStore:readRow	\N
-dataStore:writeRow	dataStore:writeRow	\N
-dataStore:listProject	dataStore:listProject	\N
-dataStore:*	dataStore:*	\N
 execution:delete	execution:delete	\N
 execution:read	execution:read	\N
 execution:retry	execution:retry	\N
@@ -667,6 +737,29 @@ mcpApiKey:create	mcpApiKey:create	\N
 mcpApiKey:rotate	mcpApiKey:rotate	\N
 mcpApiKey:*	mcpApiKey:*	\N
 *	*	\N
+provisioning:manage	provisioning:manage	\N
+provisioning:*	provisioning:*	\N
+dataTable:create	dataTable:create	\N
+dataTable:read	dataTable:read	\N
+dataTable:update	dataTable:update	\N
+dataTable:delete	dataTable:delete	\N
+dataTable:list	dataTable:list	\N
+dataTable:readRow	dataTable:readRow	\N
+dataTable:writeRow	dataTable:writeRow	\N
+dataTable:listProject	dataTable:listProject	\N
+dataTable:*	dataTable:*	\N
+mcp:oauth	mcp:oauth	\N
+chatHub:manage	chatHub:manage	\N
+chatHub:message	chatHub:message	\N
+chatHub:*	chatHub:*	\N
+chatHubAgent:create	chatHubAgent:create	\N
+chatHubAgent:read	chatHubAgent:read	\N
+chatHubAgent:update	chatHubAgent:update	\N
+chatHubAgent:delete	chatHubAgent:delete	\N
+chatHubAgent:list	chatHubAgent:list	\N
+chatHubAgent:*	chatHubAgent:*	\N
+breakingChanges:list	breakingChanges:list	\N
+breakingChanges:*	breakingChanges:*	\N
 \.
 
 
@@ -675,6 +768,21 @@ mcpApiKey:*	mcpApiKey:*	\N
 --
 
 COPY "public"."role_scope" ("roleSlug", "scopeSlug") FROM stdin;
+credential:owner	credential:share
+credential:owner	credential:move
+credential:owner	credential:read
+credential:owner	credential:update
+credential:owner	credential:delete
+credential:user	credential:read
+workflow:owner	workflow:share
+workflow:owner	workflow:execute
+workflow:owner	workflow:move
+workflow:owner	workflow:read
+workflow:owner	workflow:update
+workflow:owner	workflow:delete
+workflow:editor	workflow:execute
+workflow:editor	workflow:read
+workflow:editor	workflow:update
 global:owner	annotationTag:create
 global:owner	annotationTag:read
 global:owner	annotationTag:update
@@ -763,11 +871,28 @@ global:owner	folder:list
 global:owner	folder:move
 global:owner	insights:list
 global:owner	oidc:manage
-global:owner	dataStore:list
 global:owner	role:manage
 global:owner	mcp:manage
 global:owner	mcpApiKey:create
 global:owner	mcpApiKey:rotate
+global:owner	provisioning:manage
+global:owner	dataTable:create
+global:owner	dataTable:read
+global:owner	dataTable:update
+global:owner	dataTable:delete
+global:owner	dataTable:list
+global:owner	dataTable:readRow
+global:owner	dataTable:writeRow
+global:owner	dataTable:listProject
+global:owner	mcp:oauth
+global:owner	chatHub:manage
+global:owner	chatHub:message
+global:owner	chatHubAgent:create
+global:owner	chatHubAgent:read
+global:owner	chatHubAgent:update
+global:owner	chatHubAgent:delete
+global:owner	chatHubAgent:list
+global:owner	breakingChanges:list
 global:admin	annotationTag:create
 global:admin	annotationTag:read
 global:admin	annotationTag:update
@@ -856,11 +981,28 @@ global:admin	folder:list
 global:admin	folder:move
 global:admin	insights:list
 global:admin	oidc:manage
-global:admin	dataStore:list
 global:admin	role:manage
 global:admin	mcp:manage
 global:admin	mcpApiKey:create
 global:admin	mcpApiKey:rotate
+global:admin	provisioning:manage
+global:admin	dataTable:create
+global:admin	dataTable:read
+global:admin	dataTable:update
+global:admin	dataTable:delete
+global:admin	dataTable:list
+global:admin	dataTable:readRow
+global:admin	dataTable:writeRow
+global:admin	dataTable:listProject
+global:admin	mcp:oauth
+global:admin	chatHub:manage
+global:admin	chatHub:message
+global:admin	chatHubAgent:create
+global:admin	chatHubAgent:read
+global:admin	chatHubAgent:update
+global:admin	chatHubAgent:delete
+global:admin	chatHubAgent:list
+global:admin	breakingChanges:list
 global:member	annotationTag:create
 global:member	annotationTag:read
 global:member	annotationTag:update
@@ -875,9 +1017,16 @@ global:member	tag:list
 global:member	user:list
 global:member	variable:read
 global:member	variable:list
-global:member	dataStore:list
 global:member	mcpApiKey:create
 global:member	mcpApiKey:rotate
+global:member	dataTable:list
+global:member	mcp:oauth
+global:member	chatHub:message
+global:member	chatHubAgent:create
+global:member	chatHubAgent:read
+global:member	chatHubAgent:update
+global:member	chatHubAgent:delete
+global:member	chatHubAgent:list
 project:admin	credential:share
 project:admin	credential:move
 project:admin	credential:create
@@ -908,13 +1057,13 @@ project:admin	folder:update
 project:admin	folder:delete
 project:admin	folder:list
 project:admin	folder:move
-project:admin	dataStore:create
-project:admin	dataStore:read
-project:admin	dataStore:update
-project:admin	dataStore:delete
-project:admin	dataStore:readRow
-project:admin	dataStore:writeRow
-project:admin	dataStore:listProject
+project:admin	dataTable:create
+project:admin	dataTable:read
+project:admin	dataTable:update
+project:admin	dataTable:delete
+project:admin	dataTable:readRow
+project:admin	dataTable:writeRow
+project:admin	dataTable:listProject
 project:personalOwner	credential:share
 project:personalOwner	credential:move
 project:personalOwner	credential:create
@@ -938,13 +1087,13 @@ project:personalOwner	folder:update
 project:personalOwner	folder:delete
 project:personalOwner	folder:list
 project:personalOwner	folder:move
-project:personalOwner	dataStore:create
-project:personalOwner	dataStore:read
-project:personalOwner	dataStore:update
-project:personalOwner	dataStore:delete
-project:personalOwner	dataStore:readRow
-project:personalOwner	dataStore:writeRow
-project:personalOwner	dataStore:listProject
+project:personalOwner	dataTable:create
+project:personalOwner	dataTable:read
+project:personalOwner	dataTable:update
+project:personalOwner	dataTable:delete
+project:personalOwner	dataTable:readRow
+project:personalOwner	dataTable:writeRow
+project:personalOwner	dataTable:listProject
 project:editor	credential:create
 project:editor	credential:read
 project:editor	credential:update
@@ -968,13 +1117,13 @@ project:editor	folder:read
 project:editor	folder:update
 project:editor	folder:delete
 project:editor	folder:list
-project:editor	dataStore:create
-project:editor	dataStore:read
-project:editor	dataStore:update
-project:editor	dataStore:delete
-project:editor	dataStore:readRow
-project:editor	dataStore:writeRow
-project:editor	dataStore:listProject
+project:editor	dataTable:create
+project:editor	dataTable:read
+project:editor	dataTable:update
+project:editor	dataTable:delete
+project:editor	dataTable:readRow
+project:editor	dataTable:writeRow
+project:editor	dataTable:listProject
 project:viewer	credential:read
 project:viewer	credential:list
 project:viewer	project:read
@@ -985,24 +1134,9 @@ project:viewer	workflow:read
 project:viewer	workflow:list
 project:viewer	folder:read
 project:viewer	folder:list
-project:viewer	dataStore:read
-project:viewer	dataStore:readRow
-project:viewer	dataStore:listProject
-credential:owner	credential:share
-credential:owner	credential:move
-credential:owner	credential:read
-credential:owner	credential:update
-credential:owner	credential:delete
-credential:user	credential:read
-workflow:owner	workflow:share
-workflow:owner	workflow:execute
-workflow:owner	workflow:move
-workflow:owner	workflow:read
-workflow:owner	workflow:update
-workflow:owner	workflow:delete
-workflow:editor	workflow:execute
-workflow:editor	workflow:read
-workflow:editor	workflow:update
+project:viewer	dataTable:read
+project:viewer	dataTable:readRow
+project:viewer	dataTable:listProject
 \.
 
 
@@ -1017,7 +1151,7 @@ userManagement.authenticationMethod	email	t
 features.sourceControl.sshKeys	{"encryptedPrivateKey":"U2FsdGVkX19PZcUhZkP9y+l77HvOQeAk82yrVolIgbcgRcuQyqANi+Ug2l+1p/LT0pjFUOkYkK5v2ylGxqQ+rzEtS5vNKkqjrpolZA1eiuoP7mswqZx5DkrP+ZT864zJR8eeIM9u8YLRDU18EOBwDThmAGE1XSDDu6sLGvF+EhJ5M3zrsgnc7vYHfLgonADcFBR8lD9gT1wyMNnXvu/M8cAWRsoyY3iKmYw0S/j32b2kJVoMZK4VQ6r3qsP+BvIxP6cefPnOoEJAV+XnBIgdN+gZX7gfb5HuX0ZyMipXDUOZNRoWGGMhndH5PfKkO4Ruk4wjVVZZ7w16YRsblHZg1eCT8KaisBKZ2ZWebSk6kzdq1HvDp3oNdUhu/ufMpRsJ4wPfygaLTuxfhqTEvbIwppe9xwhFQEaT6faKdLzLITTxiG3sR/M10Qe+uCIg+5lwkTK3y3kYWk6F+mwJbZ2kvScfufQ2KJK11p4vDrLTziKLVGywVCqRaJcoCaJVP1FQw1NZM/PWYy1AS5h67/7kBb/veGh8KTIyOF8a1BRITBLG2GeN7dVRM2T1WzftvSil","publicKey":"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnh5dDn0jgcayqq8F/npomWXVrV+0OrMSa+j1vrYMUL n8n deploy key"}	t
 features.sourceControl	{"branchName":"main","connectionType":"ssh","keyGeneratorType":"ed25519"}	t
 userManagement.isInstanceOwnerSetUp	true	t
-license.cert	eyJsaWNlbnNlS2V5IjoiLS0tLS1CRUdJTiBMSUNFTlNFIEtFWS0tLS0tXG5TTHJXZHpZNVZERlNSTk9saUdrcHp5MmwzVFd0aTBZMHZJMS8zeUlZdWVLVnlwd2tSYTFWT08wcVI1OVUyVTR1XG5FaVJ0K0hoektxcFF4cGIzNWg3cTNuY05LV0NWaENaL2U2bGdBL1p2OFduQVJMdlp2MitvbmlwZzkzZVo5UGFEXG4rMFpUd0c0N3dIRm5RNGpVNi95cjFLVUdneWlzaWE2eGF3cnRWN0NpTHpqWU1zeEZibCtLZHI1TWQ4ZFMzZm5BXG5sVXBoUUZGYUFUVVJlWlozendPZWxVaWoyRDhpZjdUb3lRV08yVzF4d2ZKQm1yc1E5Ly9yMFBDZk5VSGFrUyszXG5kb2tlUzFuekpuNEtSSE4wQ1pQQ2ZnMUVtbjErUjAyUlFqZzQwUHgzTHFuTmRuaThMenh3NTV2TFozREdCK0tNXG5VaUNUaTNKV2FMaitzdERWK1YvQUhBPT18fFUyRnNkR1ZrWDErdWltTkxJV3M3OXJ3SGlBMEJEQ2k1UGFDKzFqXG5qTElkei9ZYUpFVWw0ayt1NTYxN2F6T0h5MXoyeTdxVE1aT3h1SFNrS3B0MW80RU9TbnFsdnowWlRQczFyQnlMXG5nMDdydkJhc0VRUzRKcDBsY3VlZlpxUHFWRVpDcU15OVN4amg1b3pENFF4ZS9EZHRBV2xzQmxpZnNCVUI0Y0NnXG5ZOHpzVnU3b09Tck9qWTFsa2pCdlZLaWtKYU9wckxvTGs2NVAwcnJvbWpRT3Nia0JLNjB1VHBMTE1UZmM1TGxDXG5aMTh3OTBha25ZOVpsZUhFZSt5YUhhOU1mTWVRQnRBWkVjYWRuVG9NNzFDMllMUVR5c29KditkVUVWTTJyRTBuXG5QaDRobXYra1JoeUhHdlgrS01RbzVETkhLL2JNTmN0aGMwTEtUWDFhenljZC9DVzJ0UWcwbHdUcmUwWTFvdFg1XG44M21ick5vOUt1bmpGZHZldWc5WS9iZkdYbHUwNEhOQ2RZL09Sdk11RDNZcEI2cHlsOTVpM1kvNXlVU21zMU96XG5kZzRwZkdlTTZranhWSXhVV3dzeEc2UkQvRTU2QVNKRm1jQWNXdlVtSlkzbWtWVTN6d2YwSGJVcGh4WkVIN1dIXG5lRS91ZnVYalltSUpMN0lQdXNtYVd3ZEFlcWJUcm9VSU5vN25SQnduY294RG9vSU9hYjc1WURYdmxtUEptbWQyXG50d1p1T3h1Y1cvTjQ5Mm9ieUs3ZEsveUo5RHlvUFYyUmdyelVWd2VpVDdhZDg3NlE2U1ZoKy94dTFrSWpoeC9oXG5BWHoranV5MllaMDBCRE5tMTRXMmxsUTdaRzJFVjdaTGVOZXhSM0pYYUhVeWdsVXZMVElIZDlxQmRRVzdCRGhyXG5NWVVCL3RvTTd3ME5aN3lGQ3pXRy9WUXFsV0IyZFpuam5XSzg3c1lUMnVudjkwOHdEbHlOUTVxak1XZklDL01nXG5jY3cwK1JiR09nMlQ5dFdhR05UVDdPdkFGNTRYbmw3UGJ0Smcyb3gzaVZWU0YyeUJZRnovODJON3p0aVBpbW0rXG40cmwrRHFrUExub0JzQURrYXRnWHJGVUNlaTNJcHBBY04yVEtzSVJQNDEydXZrSndmL1ova1dySkc4cnBORjM5XG4yZUh3YzJVMEVZQnRKMEpjT3FLUGl1OWQxbnFvSjN4MGlPK1F0NlFlMmdsZEpIRjIxUjMybFlrUFlGTElZbGhMXG5PSDBMZnZPTzNZSnFDTlZRM1NyY1o4RnFLdmZBdGdKQ3JBWFUxWDZOcGYyNkd6MGlacGdGUVgvQTAvelpwdjlqXG5jOGt3RTVqOEVzNWs1NUUvYVhnTmNrK2tzbUZISm9VeS8wbWg4S2JtQ0JxZDMrdlJCU1p0eFo3QjJ4YzJWUytZXG5XTUFvWU5vd29lRCsvRmhGcnk5VXNXWkk3Y0hXa0hsWW4rbzE1MnZZb2dNeFBDeFZpby9Hd0lnTlNnaVNhbThlXG50Q0ZpYjRHYlRiR1VIVjhTTCtRajNaYUpWNGIyK2lnRTFFZmUvMFh2UnVNMnNUWE41K2hUU2FBMmVlZkZnaFZ2XG5IekpySE1HVTZxRUx3Rk84SVMyRjlValAyVDlnTFdwMHM4NDFLWUFWOERkWEJwSEJWN0VkQXBEVGVRZDMyc3BjXG5QV1RIMFd6ejZFUlo1RFUzazI1dTdsbjk4WHJhS0xWaStLbUxRZktKUExMczBKUWtFZjJFaXJkZHc0ZDJiSDQzXG5OWVFlOVBuaXIzL1J2cnJEajNPUForR0ErazUyLzVFbGNKK2FMdERrNWd6c1lkeXBGa012SkVTNjhoWjRaYUc1XG5ZTFdMdEVQa3l0L3EwYzRZNEhYcTN6ZHlEek9abm1QZGkxNVpmcU4wbWdtNHhOZ0RzamxzdWMvYTUxSVJJMEpYXG45cU1rT3hkNFpBQUhFS042dnovcXIyODFwVTlzMWJBWlBWV3lMOW90d3NXQldrbzR2RzhIVURPRDhHZTg5M05wXG44SXhHOW1xRU92eWNvRmJkMUhjYzNHMUU5Y3VQeTdZWEVnMlAra0tPSXNzYk0wU2ZGQ3BHNXBpTGp1RGUyT1lUXG55cTdMc0dCUFd1d3pEUkd6ZEcrbEF3YUdpTFNMbW1XWEVMMjJhL1NWRVBzVDgyQUF2N1RLckR3amJRajh2SmdvXG5zMzJCbDNoN3haS1FQOFl1QmF1bUY5SHcxNUx5SGU1ZzFzRWtEM3l4OUk5QkhjczhEVFp6K2IrZGY5eGtoVmN0XG5rTURGYXcwbGNLQy9oK1NCOGVkMERyWi9QMTU4cEVpSGhmMUJ3ZnBjbGp5KzlhMlp1ZEs0VXRRcS9VOUg5aWptXG55NThCZ2hvTEJTa1lpTjFRU3BGQVZzbHlna0NpaHlHNXpyeEQ4MkFQSHpLM3J4YkxNT0R3ZTBYTFNYUWdwajg0XG5LTC9jOENOeFpIV0dtVW1qTzQyT0ZKeFNzQ3M4Zis0NkhkbXF6R2IyQXJwT1cvQzR4U3ljTHhmQXVRd2tXSUkwXG5waXNleGFvelcyWVl5Tkd4L3ZCeWNFNncyeHNqUWx3ZTRsZzBUTUpvWEI5c0VJMFZiVzg5TUM0MldEamE2UVlxXG55Q2QyVTlxem4wTlhkaGVyWmJ0aGdtZnB3MlZqTGxXQURnVnZ6S3RKN0dZUE9yRzRFTDFVRUZETDcvMEM1d1NWXG54R094dVZCYjZRVUlOeUM5N2xtQUN0ZzFDREo0YUljUE1tUHFTVlhZbjdPVFB3OVVoajZGazRhNGw1b28yaVZoXG5ueGw4d2RXSWtNQlFIVkp5OFdKOHU4TXA2SzY3c3krSzVDVGtlSnN4SWdwc0RZWUx4VFN3UzJiUjNlU0NNNGdvXG4vd2pZUG5pVHJXU2dDRFNDRVgzUFBIOXFYVmFGT0YvTGdMcGxLNVdxeXp1WnM5QndCYWVmeGNZbG9YcVZOOXVOXG5DNmRRK3Q1NnUwTVR2aStUTHNCWkUxK0hVQUZnTGdzamlWZlZ3azBKaGFmOUZ5S0IvT3dSRk5xNzJHTHVxOW5IXG5OYm1YcEFrSUtTTytMbjgxa3RucjU2bk8waUJBb2hXeUtiM3BvUittM291ajltbXc9PXx8S2YrRUw2by9GSFdTXG42bVdxT1prelhSTG14dnNER0lYV0dHV3c3M2hVTEVYY1JZSHhYUHYybG5VNjhzWExDMWR3SDVlZnVJcFlTRHZwXG44MjYxdGI1cXY4V2Q1amJTbzIzaTR0YXRNVEMzbWdEbGVFVENhb2RpcVNYby9vbXdNQ1d4dXFTZFhtWWhuVC9BXG52UXAyUS9hSDVndld5YkhhcGFTUUcwQnZXRXM1bThuaEVzRklrazFjQ0FFUGM4MTAxUW1SY0Nkb3dkZDBBc0U2XG43MFJURC96b0IydzE1YzJWWE1YZTRaL3pXeWQwMmwwTzdmcDM1OVV1UzluQkxWY2hCTXBtZldMR0dWNHY1NGZoXG5EWFkxZ01LcHhMRkQ3dHZjdEVvK0dTWmVPRzdTRGg2N1ZhQmFGWFdzanVia2h1L1UvRDFsMk1ncjhBbUhHT0NPXG5FelFack5PcFpRPT1cbi0tLS0tRU5EIExJQ0VOU0UgS0VZLS0tLS0iLCJ4NTA5IjoiLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tXG5NSUlFRERDQ0FmUUNDUUNxZzJvRFQ4MHh3akFOQmdrcWhraUc5dzBCQVFVRkFEQklNUXN3Q1FZRFZRUUdFd0pFXG5SVEVQTUEwR0ExVUVDQXdHUW1WeWJHbHVNUTh3RFFZRFZRUUhEQVpDWlhKc2FXNHhGekFWQmdOVkJBTU1EbXhwXG5ZMlZ1YzJVdWJqaHVMbWx2TUI0WERUSXlNRFl5TkRBME1UQTBNRm9YRFRJek1EWXlOREEwTVRBME1Gb3dTREVMXG5NQWtHQTFVRUJoTUNSRVV4RHpBTkJnTlZCQWdNQmtKbGNteHBiakVQTUEwR0ExVUVCd3dHUW1WeWJHbHVNUmN3XG5GUVlEVlFRRERBNXNhV05sYm5ObExtNDRiaTVwYnpDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDXG5BUW9DZ2dFQkFNQk0wNVhCNDRnNXhmbUNMd2RwVVR3QVQ4K0NCa3lMS0ZzZXprRDVLLzZXaGFYL1hyc2QvUWQwXG4yMEo3d2w1V2RIVTRjVkJtRlJqVndWemtsQ0syeVlKaThtang4c1hzR3E5UTFsYlVlTUtmVjlkc2dmdWhubEFTXG50blFaZ2x1Z09uRjJGZ1JoWGIvakswdHhUb2FvK2JORTZyNGdJRXpwa3RITEJUWXZ2aXVKbXJlZjdXYlBSdDRJXG5uZDlEN2xoeWJlYnloVjdrdXpqUUEvcFBLSFRGczhNVEhaOGhZVXhSeXJwbTMrTVl6UUQrYmpBMlUxRkljdGFVXG53UVhZV2FON3QydVR3Q3Q5ekFLc21ZL1dlT2J2bDNUWk41T05MQXp5V0dDdWxtNWN3S1IzeGJsQlp6WG5CNmdzXG5Pbk4yT0FkU3RjelRWQ3ljbThwY0ZVcnl0S1NLa0dFQ0F3RUFBVEFOQmdrcWhraUc5dzBCQVFVRkFBT0NBZ0VBXG5sSjAxd2NuMXZqWFhDSHVvaTdSMERKMWxseDErZGFmcXlFcVBBMjdKdStMWG1WVkdYUW9yUzFiOHhqVXFVa2NaXG5UQndiV0ZPNXo1ZFptTnZuYnlqYXptKzZvT2cwUE1hWXhoNlRGd3NJMlBPYmM3YkZ2MmVheXdQdC8xQ3BuYzQwXG5xVU1oZnZSeC9HQ1pQQ1d6My8yUlBKV1g5alFEU0hYQ1hxOEJXK0kvM2N1TERaeVkzZkVZQkIwcDNEdlZtYWQ2XG42V0hRYVVyaU4wL0xxeVNPcC9MWmdsbC90MDI5Z1dWdDA1WmliR29LK2NWaFpFY3NMY1VJaHJqMnVGR0ZkM0ltXG5KTGcxSktKN2pLU0JVUU9kSU1EdnNGVUY3WWRNdk11ckNZQTJzT05OOENaK0k1eFFWMUtTOWV2R0hNNWZtd2dTXG5PUEZ2UHp0RENpMC8xdVc5dE9nSHBvcnVvZGFjdCtFWk5rQVRYQ3ZaaXUydy9xdEtSSkY0VTRJVEVtNWFXMGt3XG42enVDOHh5SWt0N3ZoZHM0OFV1UlNHSDlqSnJBZW1sRWl6dEdJTGhHRHF6UUdZYmxoVVFGR01iQmI3amhlTHlDXG5MSjFXT0c2MkYxc3B4Q0tCekVXNXg2cFIxelQxbWhFZ2Q0TWtMYTZ6UFRwYWNyZDk1QWd4YUdLRUxhMVJXU0ZwXG5NdmRoR2s0TnY3aG5iOHIrQnVNUkM2aWVkUE1DelhxL001MGNOOEFnOGJ3K0oxYUZvKzBFSzJoV0phN2tpRStzXG45R3ZGalNkekNGbFVQaEtra1Vaa1NvNWFPdGNRcTdKdTZrV0JoTG9GWUtncHJscDFRVkIwc0daQTZvNkR0cWphXG5HNy9SazZ2YmFZOHdzTllLMnpCWFRUOG5laDVab1JaL1BKTFV0RUV0YzdZPVxuLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLSJ9	f
+license.cert	eyJsaWNlbnNlS2V5IjoiLS0tLS1CRUdJTiBMSUNFTlNFIEtFWS0tLS0tXG5rdVZyTlROa1dwUDhtSkhUZFZac3l0ZXBsM3lUSjczYloxVVEzNTdVcVZRL2d0U0VCTjFLZ25lSjNmbGZYc1VVXG5aRGJnaVZZT0pudnpBUkRXblRZWUtHdVEwYjhQSUNqbVZmVktFeFU3YWk5Q1k0cmx4OWs2ZGdMMFB4SlR2QTU4XG5iRVdFOXFFL2VVSzkxMFlCQnRVUDRpMkFmLzV4ck5oaWw0a2ttU2NRT0ZkN0o3d3Y4M3BmUDIzcFBwdi9oMUlnXG42cWFOWGk0OXdITEJTdU1Za1VtYUs1RUdxMmVBcHNwNTFBUXJVclVvY2g1TFlsZjhOeG1UTVEvWWlGck1mUVRGXG5nOFJuQmREM0lkRi9FRWJXdEJNcWdaMFlZcVdwbnBLODJZeEU4TWtpbFF4RHNNS1NBR3hYbmtRRjdlcFhZTUNnXG5mUHNVMkZ6ei9IQzB4bFBBQnlGVlJnPT18fFUyRnNkR1ZrWDEvVFBxTXMwSXhuRE1kMDUwZ3FaemlwUjBHZGxtXG4xVXpSUVFvV0xyUzYwYlFQVWRnNFIveThpVUlUUkFmTnFDU3BWYWR5R0JZL0FzSzd3RWR6L0hwM3J3TUxFdGpPXG43a1NEOTRCZTlQYnNld2pQMGIzZlhvVUtCRzIvWkRKSHhOUFZoUmRNOFN5dWkrZTlOcHhkVmE4R05pQ3RMS0REXG5aeTdGdk5pTHpTRjBuRjBIdGFYaGkvejFaRUJVNG01bjh0ZEF3SXhBdVRmSVoyNjVXNGszSmYxRXpsNjVDTVVBXG5XNCs1Ri9jWWtDdDBkby9PdXduakxSQVh1YXZmT3MyYnpLdzZWN0lydWp5UXF5R2cxMS9RRVBkYk90UDNhdVhnXG5OaitIL05ia003dGYzRVRoazFXZ3NxQlB2VDQvR0thbkg2QTdjL2pnK255ZGVKUzlBYWdiQWkzZmY2RlBnUjd4XG5GazBYc1lzTGJycWxvcUphZll2cUxrOFZNWUtUUURRT1F5TDZiSjJzMnBvbGtsNXdJbFVDVTVxNXVCSGtvajZ0XG5YVWdhMmhqcDN2V0pQNU5KOEczTGZNV2RwdFprK1BleDhJVG9NZHRQc0toUmZDTDh5TWJ1NCtEcllsZmlHMFI0XG5IUHRWU1RWbXk3QTY3ZExsWjhLaUg0WEVlNGpoT2ZLUDRCZXg3bEx3Z1ZuWGJhalIrMnBGOW4vRUxTdllkVWljXG4rLzErSFJLYUpFWURWRHFxQUszUGNjbDRxRHNlbm12Q0d5V0tSMnUyeThmYmhEQmtxN3IxaHdvUHNkQlNEbUxKXG5kdmNuM0tYU1BNallQSzVTNml5V0lnQ3RvU2xOR3VwNEs1am5naFgveVcyNFFwUC9QNE9SdHpERlgvRjIvcDhiXG5OdTczR2F1ckdlbmU4enc1SHhiSGR6SXdmdHd3bExZWUZ4WE55d09GeStKR2dJVmJZdmhsaXZlNjJTSC9Ud010XG5JcXlLZ3B6M1hob1lGZHdIZDBMN1ZBY044NzE1QWFvS2krZUF6ditVczMvTloyb1gvWGNwbzhEelVvQjZteG9WXG45Tnk2Z2tjcjF3a21KSmI1UkcyMmkxU1l5d2Z6QU1HK3MwRUp1OWpFK0FyS0hCbFBlVVBJNVgxZFhKWkFCaHg1XG5IMFpyd1h0TFl6S1dGWEpiRGpQaWZ5Ly84VkZpeHdnL2hpcHhtbEgyeHFTL1phTXdDOHBMV2NiRk5iOW90UmxIXG5tTmw1MDBiL2JmZDc4RDNmaC9JTDJBMGZrQ05ZT2gzNExjVXNLRHczazUrcGtmdnR2M1BzSXJDR1lHdmdzZkFmXG5XcEp0T2syOGZ3U21wWXBtQ1ZqcDZUVCtYYi95YURVL1k1OU5IUlhscVllYWtjWXRHb0RzOE8zNDFkdlQxNE1TXG54a3R6TTQyK2lSMFo2TWlLSEFxeEY2R1dwamJwVWp6d01qdWpKVmpNNlJVSExPQWg1SkNvTEsrRUIxODJwMHdQXG5RbFA3NnZiMG02cjRpdVJldEZLbzE1NUtsdXRBNW9BaHBkaWZOcXd5V0hMK2NLRGlueGQ3T3ZUcGNmQlZRaHNpXG5GK0E0dXdHYlMrODJyc2JLaTVwVzRlejVGdzN6c1J2K0d1ZGhGd29RT2JhQ1lFRW9tckdlY2NxTTRaZ1dEOHp5XG5lTEM5dTVGVUZMUFA4RlhIdzJBN1ZMbEtQUEowNnZ5ZmRRU2RsTmdXZTVDL0RpMG1oTW9FR0lFR0hlbVNPb1ZVXG5JbFdXbDJ0ZlZFT3dsNlQ4TEJ0NWt3b2ttWElxbWZmNmhPVW1ia2F6WUVIQVlDMlhkcjNDdGJvaFFYRnluNE5GXG5CZ3J3OXB6ZGNvLzAwc1EzZEk5RGFMY0d4allqQVRMeUlxb0t1UnNJcWlXcTdEdXlrdUlJZWM2NGdjRlpBc0VPXG5ydzQrSEZFbW4wZ1lJL0htOHVRakFmSG5KQ1Frd1NNa1prNzVQMHd0MjRPaE93SUZ4VGhTZmNmZ2ltVDJaZFNVXG42cDJLVS9mSFcxYXhaanVqMlI5ZTJvREMvbjc3bGtGUWxPWXZLYUJQV0w5ZVYxTktCaDdmdDhCbTB2a0tycWxoXG5YOFc0QUx5cy9PSUxSQnQrUzlKd3FPOFFvNE14ZjlMTG1rV1FrRmp6OTVFRml0aC9UbzF3elZkdTlIeUtYb04rXG5oWi9oVXlwb3dHNW9KeDJDdGVGdjFWOWZYakJPOWtYb2R6U0pyL1lZK1FJMjhJUXYzVnJacVRqd3B0c3k2UDMvXG5lQXRmUmVXdktZZEpoQzNneHZkeG4rVnFCcmd4c3hSUHlpa3RCZkU4QTRFcFNzQUdiUlA5SVhvQU82eExLVXBGXG5RUTVuN2lhbzdDR1ozN2dxM09jWkhRN2xaNXozaEdoTi9paDB1cWl3R1VOMmNUWk5vNEg4MzdYREZLWHpYeUVLXG5mMnFrQzZ4Nk1WeEFPbW1kQ29zcVRBL2tPc0tOWGVUcHROR0VxczJNSmRqMmFSSjBhZjFzZTI1SjJreU5DQnJGXG5EbVVCQnVFV2FrZ0VvQmtZMExFdUlHYnB3bGNabjMzbGZRVWFhUkZ0SytGbUdVcTZ3OTV2N1hTTFpLRWNiYlorXG50WS92Zjlnc2dzVmFjZTJjNU81OWxYTTl4MERycTNFbEZuVFIvNGplajdjeDlpVE1YR21ORitHVDFaL1ZoeGpRXG5UMkVWemQzRXdONXQ4RnNrQjJySEpZMzhXRTk3TW81bnhBS3BQbmtITllZdnA2L0k0Ym1RM1I3Zkl6Q2VFSWlTXG5JamdDWDRNRWhCWW8xN1Y3RVJ0VVVFV1Q3SzEwVVFCbit5dFpKUEZ3SUpwL014MUx4QXozcmlWYk5QUVFVK05KXG5hcVhsS084Q1dacmI0d3lxWkRaUlkwTkZTem1NaFl4ZzluenBuMFhKWlFzclBmRzlVM1c0V0VJdnlPd3lEU0ozXG42Y0xRalZ1S3d3cUlKWWZYSTV2UVFCSTNCM2ZoZEhhMmFISCswNkx4ZlMyQ0lWZFoybW4rM040NGh5VnhLT21UXG45S1VENFBTT3BKUEY0anhlNFBSSUNtLzljb3lqK1BEYmIxMCsvWm00b0RUS2RNOVE9PXx8cklOM0JtWUlVcmlwXG5NN2hZalRNMkhKVkpxdUZTMkV0MG4xUjdaSk52TnN6dTA4VkpsSkZrV1dCSm5ZMkMvd0hnWDJFbU1CQVVQU0V6XG45KzhiYlhSeGtNZEFpTFBOWS8vS21uQ3BDK05ZZjRMbFVpMmlSdlN6NjExWkRhcVhJekV2T3Z1RmhIS3lkM3dUXG53bnF3UGpZQjg2TkZwZFg0NERnR3czMnVGWkI0TDk2OHNneW5Rd3VFYUwxbnJwek9QTHlmMjV0TEFwcjZHOExtXG42c1VkMkFIakV1a0NDWWcxeVplVnJsdHVvQUtVU2dyOXFFVDIzTlRBa3gyREV2N0I1eC9laHpHajM4ZXNibndUXG4vS2IrL2NJbHhkVElBNkJMcFEza0NBWW13eTZQdWZhTHkvWnRBbUVFN2g0L29GZlRrY3dzS2F0ZEFuYjJtVXN1XG43SUs5S3l3cGxRPT1cbi0tLS0tRU5EIExJQ0VOU0UgS0VZLS0tLS0iLCJ4NTA5IjoiLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tXG5NSUlFRERDQ0FmUUNDUUNxZzJvRFQ4MHh3akFOQmdrcWhraUc5dzBCQVFVRkFEQklNUXN3Q1FZRFZRUUdFd0pFXG5SVEVQTUEwR0ExVUVDQXdHUW1WeWJHbHVNUTh3RFFZRFZRUUhEQVpDWlhKc2FXNHhGekFWQmdOVkJBTU1EbXhwXG5ZMlZ1YzJVdWJqaHVMbWx2TUI0WERUSXlNRFl5TkRBME1UQTBNRm9YRFRJek1EWXlOREEwTVRBME1Gb3dTREVMXG5NQWtHQTFVRUJoTUNSRVV4RHpBTkJnTlZCQWdNQmtKbGNteHBiakVQTUEwR0ExVUVCd3dHUW1WeWJHbHVNUmN3XG5GUVlEVlFRRERBNXNhV05sYm5ObExtNDRiaTVwYnpDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDXG5BUW9DZ2dFQkFNQk0wNVhCNDRnNXhmbUNMd2RwVVR3QVQ4K0NCa3lMS0ZzZXprRDVLLzZXaGFYL1hyc2QvUWQwXG4yMEo3d2w1V2RIVTRjVkJtRlJqVndWemtsQ0syeVlKaThtang4c1hzR3E5UTFsYlVlTUtmVjlkc2dmdWhubEFTXG50blFaZ2x1Z09uRjJGZ1JoWGIvakswdHhUb2FvK2JORTZyNGdJRXpwa3RITEJUWXZ2aXVKbXJlZjdXYlBSdDRJXG5uZDlEN2xoeWJlYnloVjdrdXpqUUEvcFBLSFRGczhNVEhaOGhZVXhSeXJwbTMrTVl6UUQrYmpBMlUxRkljdGFVXG53UVhZV2FON3QydVR3Q3Q5ekFLc21ZL1dlT2J2bDNUWk41T05MQXp5V0dDdWxtNWN3S1IzeGJsQlp6WG5CNmdzXG5Pbk4yT0FkU3RjelRWQ3ljbThwY0ZVcnl0S1NLa0dFQ0F3RUFBVEFOQmdrcWhraUc5dzBCQVFVRkFBT0NBZ0VBXG5sSjAxd2NuMXZqWFhDSHVvaTdSMERKMWxseDErZGFmcXlFcVBBMjdKdStMWG1WVkdYUW9yUzFiOHhqVXFVa2NaXG5UQndiV0ZPNXo1ZFptTnZuYnlqYXptKzZvT2cwUE1hWXhoNlRGd3NJMlBPYmM3YkZ2MmVheXdQdC8xQ3BuYzQwXG5xVU1oZnZSeC9HQ1pQQ1d6My8yUlBKV1g5alFEU0hYQ1hxOEJXK0kvM2N1TERaeVkzZkVZQkIwcDNEdlZtYWQ2XG42V0hRYVVyaU4wL0xxeVNPcC9MWmdsbC90MDI5Z1dWdDA1WmliR29LK2NWaFpFY3NMY1VJaHJqMnVGR0ZkM0ltXG5KTGcxSktKN2pLU0JVUU9kSU1EdnNGVUY3WWRNdk11ckNZQTJzT05OOENaK0k1eFFWMUtTOWV2R0hNNWZtd2dTXG5PUEZ2UHp0RENpMC8xdVc5dE9nSHBvcnVvZGFjdCtFWk5rQVRYQ3ZaaXUydy9xdEtSSkY0VTRJVEVtNWFXMGt3XG42enVDOHh5SWt0N3ZoZHM0OFV1UlNHSDlqSnJBZW1sRWl6dEdJTGhHRHF6UUdZYmxoVVFGR01iQmI3amhlTHlDXG5MSjFXT0c2MkYxc3B4Q0tCekVXNXg2cFIxelQxbWhFZ2Q0TWtMYTZ6UFRwYWNyZDk1QWd4YUdLRUxhMVJXU0ZwXG5NdmRoR2s0TnY3aG5iOHIrQnVNUkM2aWVkUE1DelhxL001MGNOOEFnOGJ3K0oxYUZvKzBFSzJoV0phN2tpRStzXG45R3ZGalNkekNGbFVQaEtra1Vaa1NvNWFPdGNRcTdKdTZrV0JoTG9GWUtncHJscDFRVkIwc0daQTZvNkR0cWphXG5HNy9SazZ2YmFZOHdzTllLMnpCWFRUOG5laDVab1JaL1BKTFV0RUV0YzdZPVxuLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLSJ9	f
 \.
 
 
@@ -1091,10 +1225,23 @@ COPY "public"."webhook_entity" ("webhookPath", "method", "node", "webhookId", "p
 
 
 --
+-- Data for Name: workflow_dependency; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "public"."workflow_dependency" ("id", "workflowId", "workflowVersionId", "dependencyType", "dependencyKey", "dependencyInfo", "indexVersionId", "createdAt") FROM stdin;
+\.
+
+
+--
 -- Data for Name: workflow_history; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "public"."workflow_history" ("versionId", "workflowId", "authors", "createdAt", "updatedAt", "nodes", "connections") FROM stdin;
+COPY "public"."workflow_history" ("versionId", "workflowId", "authors", "createdAt", "updatedAt", "nodes", "connections", "name", "autosaved", "description") FROM stdin;
+46327ea6-6714-42a4-97d0-0ac05253e45f	CVzrDFsnctC7SzNS	system migration	2025-11-25 15:24:34.002+00	2025-11-25 15:24:34.002+00	[{"parameters":{},"type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[0,0],"id":"2807691f-9cbc-4ae0-b99f-77abaff9ea3e","name":"When clicking ‘Execute workflow’"},{"parameters":{"sendTo":"amberbambico.54@gmail.com","subject":"hello","message":"hello","options":{}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[560,0],"id":"82b41fe9-0588-4c8c-aa14-a232fd07ec17","name":"Send a message","webhookId":"54d7bf6c-3c19-49a6-abd4-7233cb96feb4","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"content":"## 1.\\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)","width":448},"type":"n8n-nodes-base.stickyNote","position":[-16,-192],"typeVersion":1,"id":"1fa10d5e-c2c2-41b6-b6c5-9b32e7998bbc","name":"Sticky Note"},{"parameters":{"operation":"appendOrUpdate","documentId":{"__rl":true,"mode":"list","value":""},"sheetName":{"__rl":true,"mode":"list","value":""}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"72f88487-827c-409c-a9db-6d0b93b75055","name":"Append or update row in sheet"}]	{"When clicking ‘Execute workflow’":{"main":[[{"node":"Append or update row in sheet","type":"main","index":0}]]},"Append or update row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]}}	\N	f	\N
+4648e10f-14da-4e1c-9c48-a7a4028d21a3	voZ63FWwaK7OZ3qy	system migration	2025-11-25 15:24:34.002+00	2025-11-25 15:24:34.002+00	[{"parameters":{"formTitle":"Contact Form","formDescription":"Contact us when you have any problem to solve","formFields":{"values":[{"fieldLabel":"First Name","placeholder":"Enter you name","requiredField":true},{"fieldLabel":"Last Name","placeholder":"Enter your last name","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Enter Your Email","requiredField":true},{"fieldLabel":"Description","placeholder":"Elaborate the problem"},{"fieldLabel":"Course Type","fieldType":"dropdown","fieldOptions":{"values":[{"option":"n8n course"},{"option":"Zapier couse"},{"option":"Midjourney course"}]}}]},"options":{}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"cd57f4ca-774e-469e-95bf-b95c08107ccd","name":"On form submission","webhookId":"151d9ef3-a068-46f0-9527-4f50d54e0d0e"}]	{}	\N	f	\N
+dc3dff43-103d-4a23-aae0-6ff5172f8433	rqlUyMiEmIGvzbdF	system migration	2025-11-25 15:24:34.002+00	2025-11-25 15:24:34.002+00	[{"parameters":{"rule":{"interval":[{}]}},"type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0],"id":"2de74a8d-0902-46e1-9259-058f2175b593","name":"Schedule Trigger"}]	{}	\N	f	\N
+1df38851-8863-4a61-9f11-86b9292e0641	1hiCHSIWj6hNUOQB	system migration	2025-11-25 15:24:34.002+00	2025-11-25 15:24:34.002+00	[{"parameters":{"formTitle":"Test Info","formDescription":"Please Fill out the Form Below","formFields":{"values":[{"fieldLabel":"Full Name","placeholder":"Juan Tamad","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Hello@gmail.com","requiredField":true},{"fieldLabel":"Phone Number","placeholder":"+63 912 345 6789","requiredField":true},{"fieldLabel":"Description","placeholder":"Please Provide a description below","requiredField":true}]},"options":{"appendAttribution":false}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"7676b103-5de1-4298-83b4-8b09edc67ce8","name":"On form submission","webhookId":"b2482471-8fb8-4960-a39e-9464d2167715"},{"parameters":{"operation":"append","documentId":{"__rl":true,"value":"1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI","mode":"list","cachedResultName":"Activity n8n","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI/edit?usp=drivesdk"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/1D-2PlDusBNFCV6JIKdUze1dd0C9qOT6JhlTSI1IlauI/edit#gid=0"},"columns":{"mappingMode":"defineBelow","value":{"Full Name":"={{ $json['Full Name'] }}","Email":"={{ $json.Email }}","Phone Number":"={{ $json['Phone Number'] }}","Description":"={{ $json.Description }}"},"matchingColumns":[],"schema":[{"id":"Full Name","displayName":"Full Name","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Email","displayName":"Email","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Phone Number","displayName":"Phone Number","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Description","displayName":"Description","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true}],"attemptToConvertTypes":false,"convertFieldsToString":false},"options":{}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"dd6fe731-13c7-47e2-b72c-bf6b18e4dd28","name":"Append row in sheet","credentials":{"googleSheetsOAuth2Api":{"id":"YiO5g4n9aj4N6K5r","name":"Google Sheets account"}}},{"parameters":{"authentication":"oAuth2","select":"channel","channelId":{"__rl":true,"value":"C09REAYK8FP","mode":"list","cachedResultName":"ai"},"text":"=A New Client has been Added to the Data\\nFulle Name:{{ $json['Full Name'] }}\\nEmail:{{ $json.Email }}\\nPhone Number:{{ $json['Phone Number'] }}\\nDescription:{{ $json.Description }}","otherOptions":{}},"type":"n8n-nodes-base.slack","typeVersion":2.3,"position":[416,0],"id":"d82a7d3f-89b6-4147-bc45-9c3cfc3943d8","name":"Send a message","webhookId":"444f31bf-afcc-40bb-acc5-8aa50db553ab","credentials":{"slackOAuth2Api":{"id":"kPI2sESxpdDipRRh","name":"Slack account"}}},{"parameters":{"sendTo":"={{ $('Append row in sheet').item.json.Email }}","subject":"Thank you for submitting the form","emailType":"text","message":"=Hi {{ $('Append row in sheet').item.json['Full Name'] }},\\n\\nThank you for taking the time to fill out our form.\\nWe’ve received your information successfully and will review it shortly.\\n\\nIf you have any questions, feel free to reply to this message.\\nWe appreciate your time and interest!\\n\\nBest regards,\\nThe Team","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[624,0],"id":"9b321c83-b0de-4a20-94b3-8a8ab71f3019","name":"Send a message1","webhookId":"c5080767-d0f8-40d6-a8d9-b66396e79c3f","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"familyName":"={{ $('Append row in sheet').item.json['Full Name'] }}","additionalFields":{"emailsUi":{"emailsValues":[{"type":"work","value":"={{ $('Append row in sheet').item.json.Email }}"}]},"phoneUi":{"phoneValues":[{"type":"work","value":"={{ $('Append row in sheet').item.json['Phone Number'] }}"}]}}},"type":"n8n-nodes-base.googleContacts","typeVersion":1,"position":[832,0],"id":"2ccae68f-4f7e-4f99-8baf-c9ee7948544a","name":"Create a contact","credentials":{"googleContactsOAuth2Api":{"id":"LOg9qvC6ODDyOno0","name":"Google Contacts account"}}},{"parameters":{"content":"## Trigger: Google Sheets\\n\\nName, email, phone number, description\\n"},"type":"n8n-nodes-base.stickyNote","position":[128,-208],"typeVersion":1,"id":"ebd56b3d-093b-45df-85de-d5649e3a620c","name":"Sticky Note"},{"parameters":{"content":"## Slack: Notify Your Team\\n\\nAdd a Slack node to send a message to your team's Channel asking to handle the client's Request\\n\\nthe message should show\\nName, email, phone number, description\\n\\n\\n","height":208,"width":304},"type":"n8n-nodes-base.stickyNote","position":[320,176],"typeVersion":1,"id":"5b68b80b-420a-492e-9228-9f5f33a57492","name":"Sticky Note1"},{"parameters":{"content":"## Gmail: Thank you Email to Client\\n\\nAdd a Gmail node to send a thank you email to the client's email address from the sheet.\\n","height":208},"type":"n8n-nodes-base.stickyNote","position":[544,-240],"typeVersion":1,"id":"ec0aedd1-bfd4-42b5-87a0-6fcac780de03","name":"Sticky Note2"},{"parameters":{"content":"## Google Contacts: Add Client\\n\\nAdd a Google Contacts node to create a new contact using the name, email, and phone number from your google sheet.\\n","height":208},"type":"n8n-nodes-base.stickyNote","position":[800,176],"typeVersion":1,"id":"74935353-81ef-4aef-b6bc-543b2f827367","name":"Sticky Note3"}]	{"On form submission":{"main":[[{"node":"Append row in sheet","type":"main","index":0}]]},"Append row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]},"Send a message":{"main":[[{"node":"Send a message1","type":"main","index":0}]]},"Send a message1":{"main":[[{"node":"Create a contact","type":"main","index":0}]]}}	\N	f	\N
+98f1a092-d1bc-4097-9e0f-24c05477cc83	ucN5q0JcZhOAY6id	system migration	2025-11-25 15:24:34.002+00	2025-11-25 15:24:34.002+00	[{"parameters":{"formTitle":"Contact Form","formDescription":"Contact us when you have any problem to solve","formFields":{"values":[{"fieldLabel":"First Name","placeholder":"Enter you name","requiredField":true},{"fieldLabel":"Last Name","placeholder":"Enter your last name","requiredField":true},{"fieldLabel":"Email","fieldType":"email","placeholder":"Enter Your Email","requiredField":true},{"fieldLabel":"Description","placeholder":"Elaborate the problem"},{"fieldLabel":"Course Type","fieldType":"dropdown","fieldOptions":{"values":[{"option":"n8n course"},{"option":"Zapier couse"},{"option":"Midjourney course"}]}}]},"options":{}},"type":"n8n-nodes-base.formTrigger","typeVersion":2.3,"position":[0,0],"id":"cd57f4ca-774e-469e-95bf-b95c08107ccd","name":"On form submission","webhookId":"151d9ef3-a068-46f0-9527-4f50d54e0d0e"},{"parameters":{"operation":"append","documentId":{"__rl":true,"value":"19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU","mode":"list","cachedResultName":"Customer Data","cachedResultUrl":"https://docs.google.com/spreadsheets/d/19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU/edit?usp=drivesdk"},"sheetName":{"__rl":true,"value":"gid=0","mode":"list","cachedResultName":"Sheet1","cachedResultUrl":"https://docs.google.com/spreadsheets/d/19UYfLf85w9RCfKInEBL1SMfkfkuCyICxE2wcSK6CGNU/edit#gid=0"},"columns":{"mappingMode":"defineBelow","value":{"First Name ":"={{ $json['First Name'] }}","Last Name":"={{ $json['Last Name'] }}","Email":"={{ $json.Email }}","Description":"={{ $json.Description }}","Course Type":"={{ $json['Course Type'] }}"},"matchingColumns":[],"schema":[{"id":"First Name ","displayName":"First Name ","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Last Name","displayName":"Last Name","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Email","displayName":"Email","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Description","displayName":"Description","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true},{"id":"Course Type","displayName":"Course Type","required":false,"defaultMatch":false,"display":true,"type":"string","canBeUsedToMatch":true,"removed":false}],"attemptToConvertTypes":false,"convertFieldsToString":false},"options":{}},"type":"n8n-nodes-base.googleSheets","typeVersion":4.7,"position":[208,0],"id":"32e7a53c-aa23-4f88-a7b4-deffa7a668de","name":"Append row in sheet","credentials":{"googleSheetsOAuth2Api":{"id":"YiO5g4n9aj4N6K5r","name":"Google Sheets account"}}},{"parameters":{"sendTo":"=amberbambico.54@gmail.com","subject":"Thank you for your submission","emailType":"text","message":"=Hey {{ $json['First Name '] }}\\n\\nThank you for your submission, we want to confimr that we recieve a message and we will be contacting you soon.\\n\\nBest regards,\\nSupport Team","options":{"appendAttribution":false}},"type":"n8n-nodes-base.gmail","typeVersion":2.1,"position":[416,0],"id":"9dd9f512-5321-4deb-8846-764feee5e27e","name":"Send a message","webhookId":"5e3777a4-f485-4117-a7a5-c3d89fd13dba","credentials":{"gmailOAuth2":{"id":"V6F4PoZ5qguyZtAe","name":"Gmail account"}}},{"parameters":{"authentication":"oAuth2","select":"channel","channelId":{"__rl":true,"value":"C09REAYK8FP","mode":"list","cachedResultName":"ai"},"text":"=The new Client Submitted the form\\nFirst Name:{{ $('On form submission').item.json['First Name'] }}\\nEmail:{{ $('On form submission').item.json.Email }}\\nDescription:{{ $('On form submission').item.json.Description }}","otherOptions":{}},"type":"n8n-nodes-base.slack","typeVersion":2.3,"position":[624,0],"id":"2cc6c84e-be2a-4d23-aab3-d4e682b2ba23","name":"Send a message1","webhookId":"52d9201a-d517-4886-bf5e-af2bcdfdc1c3","credentials":{"slackOAuth2Api":{"id":"kPI2sESxpdDipRRh","name":"Slack account"}}}]	{"On form submission":{"main":[[{"node":"Append row in sheet","type":"main","index":0}]]},"Append row in sheet":{"main":[[{"node":"Send a message","type":"main","index":0}]]},"Send a message":{"main":[[{"node":"Send a message1","type":"main","index":0}]]}}	\N	f	\N
 \.
 
 
@@ -1234,13 +1381,27 @@ SELECT pg_catalog.setval('"public"."insights_raw_id_seq"', 1, false);
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"public"."migrations_id_seq"', 101, true);
+SELECT pg_catalog.setval('"public"."migrations_id_seq"', 116, true);
+
+
+--
+-- Name: oauth_user_consents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."oauth_user_consents_id_seq"', 1, false);
+
+
+--
+-- Name: workflow_dependency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"public"."workflow_dependency_id_seq"', 1, false);
 
 
 --
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict DCrlcGiTBPrVYZUjv4z3ZG0QZmflbWdX2o6dZQnrtFppapOTBkSPRgGok60KMPM
+-- \unrestrict O6LigPRZ4v4AYyqCoNp21MRqZahf6cvzevQ6tRzBngAR9j06tdU8sE5VE1Dqvzb
 
 RESET ALL;
