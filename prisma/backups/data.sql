@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict O6LigPRZ4v4AYyqCoNp21MRqZahf6cvzevQ6tRzBngAR9j06tdU8sE5VE1Dqvzb
+-- \restrict LOKaGEOkSMTaht7MaJsunyBGfx45vS7NrFiZ65s3DJYLVa76r6w7447ui72so3e
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -73,7 +73,7 @@ COPY "auth"."oauth_clients" ("id", "client_secret_hash", "registration_type", "r
 -- Data for Name: sessions; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
-COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id", "aal", "not_after", "refreshed_at", "user_agent", "ip", "tag", "oauth_client_id", "refresh_token_hmac_key", "refresh_token_counter") FROM stdin;
+COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id", "aal", "not_after", "refreshed_at", "user_agent", "ip", "tag", "oauth_client_id", "refresh_token_hmac_key", "refresh_token_counter", "scopes") FROM stdin;
 \.
 
 
@@ -105,7 +105,7 @@ COPY "auth"."mfa_challenges" ("id", "factor_id", "created_at", "verified_at", "i
 -- Data for Name: oauth_authorizations; Type: TABLE DATA; Schema: auth; Owner: supabase_auth_admin
 --
 
-COPY "auth"."oauth_authorizations" ("id", "authorization_id", "client_id", "user_id", "redirect_uri", "scope", "state", "resource", "code_challenge", "code_challenge_method", "response_type", "status", "authorization_code", "created_at", "expires_at", "approved_at") FROM stdin;
+COPY "auth"."oauth_authorizations" ("id", "authorization_id", "client_id", "user_id", "redirect_uri", "scope", "state", "resource", "code_challenge", "code_challenge_method", "response_type", "status", "authorization_code", "created_at", "expires_at", "approved_at", "nonce") FROM stdin;
 \.
 
 
@@ -1402,6 +1402,6 @@ SELECT pg_catalog.setval('"public"."workflow_dependency_id_seq"', 1, false);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict O6LigPRZ4v4AYyqCoNp21MRqZahf6cvzevQ6tRzBngAR9j06tdU8sE5VE1Dqvzb
+-- \unrestrict LOKaGEOkSMTaht7MaJsunyBGfx45vS7NrFiZ65s3DJYLVa76r6w7447ui72so3e
 
 RESET ALL;
