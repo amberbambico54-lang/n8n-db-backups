@@ -4,7 +4,7 @@ SET session_replication_role = replica;
 -- PostgreSQL database dump
 --
 
--- \restrict fSVRlPnm2wfxGE1z2KqM6LTQhJyhPNVz91u2ISgbSyUdYxT5pnPkRrPlhpNe7BP
+-- \restrict H4pBoi34OVd3JijSzlFM620vD9ewRHKecb5MMxnPA5jtNrvk9zP3GeFuNvcyZa8
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -205,7 +205,7 @@ project:viewer	Project Viewer	Read-only access to workflows, credentials, and ex
 --
 
 COPY "public"."user" ("id", "email", "firstName", "lastName", "password", "personalizationAnswers", "createdAt", "updatedAt", "settings", "disabled", "mfaEnabled", "mfaSecret", "mfaRecoveryCodes", "lastActiveAt", "roleSlug") FROM stdin;
-5a4961b6-3a89-432a-b7c1-90d805069b4f	amberbambico.54@gmail.com	Fernan	Bambico	$2a$10$speYYXYPVYv1eZHzUaKozODBdrev3InCIjJpaBC3pmW/6uqSDpa7q	{"version":"v4","personalization_survey_submitted_at":"2025-10-16T15:50:30.876Z","personalization_survey_n8n_version":"1.115.3","automationGoalDevops":["ci-cd","cloud-infrastructure-orchestration","data-syncing","incident-response","monitoring-alerting","reporting","other","ticketing-systems-integrations"],"automationGoalDevopsOther":"education","companySize":"personalUser","companyType":"education","role":"it","reportedSource":"youtube"}	2025-10-16 15:42:52.513+00	2026-01-10 13:06:03.102+00	{"userActivated": false}	f	f	\N	\N	2026-01-10	global:owner
+5a4961b6-3a89-432a-b7c1-90d805069b4f	amberbambico.54@gmail.com	Fernan	Bambico	$2a$10$speYYXYPVYv1eZHzUaKozODBdrev3InCIjJpaBC3pmW/6uqSDpa7q	{"version":"v4","personalization_survey_submitted_at":"2025-10-16T15:50:30.876Z","personalization_survey_n8n_version":"1.115.3","automationGoalDevops":["ci-cd","cloud-infrastructure-orchestration","data-syncing","incident-response","monitoring-alerting","reporting","other","ticketing-systems-integrations"],"automationGoalDevopsOther":"education","companySize":"personalUser","companyType":"education","role":"it","reportedSource":"youtube"}	2025-10-16 15:42:52.513+00	2026-01-11 12:52:34.218+00	{"userActivated": false}	f	f	\N	\N	2026-01-11	global:owner
 \.
 
 
@@ -1410,6 +1410,6 @@ SELECT pg_catalog.setval('"public"."workflow_dependency_id_seq"', 1, false);
 -- PostgreSQL database dump complete
 --
 
--- \unrestrict fSVRlPnm2wfxGE1z2KqM6LTQhJyhPNVz91u2ISgbSyUdYxT5pnPkRrPlhpNe7BP
+-- \unrestrict H4pBoi34OVd3JijSzlFM620vD9ewRHKecb5MMxnPA5jtNrvk9zP3GeFuNvcyZa8
 
 RESET ALL;
